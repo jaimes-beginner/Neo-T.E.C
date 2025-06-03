@@ -67,7 +67,8 @@ public class UsuarioService {
         if(usuarioEliminar == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        usuarioRepo.deleteById(id);
+        usuarioEliminar.setEstadoUsuario(false);
+        usuarioRepo.save(usuarioEliminar);
     }
 
     // Modificar la información de un usuario por su id (datosModificar)
