@@ -50,7 +50,7 @@ public class PreguntaService {
     public void eliminar(int id) {
         Pregunta pregunta = obtenerUno(id);
         if(pregunta == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         preguntaRepo.deleteById(id);
     }
@@ -59,7 +59,7 @@ public class PreguntaService {
     public Pregunta modificar(PreguntaUpdate datosModificar) {
         Pregunta pregunta = obtenerUno(datosModificar.getIdPregunta());
         if(pregunta == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         if(datosModificar.getEnunciadoPregunta() != null) {
             pregunta.setEnunciadoPregunta(datosModificar.getEnunciadoPregunta());
