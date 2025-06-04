@@ -42,18 +42,18 @@ public class Evaluacion {
     /* Relacion con preguntas, en este caso una 
     evaluación puede tener varias preguntas */
     @JsonManagedReference
-    @OneToMany(mappedBy = "evaluacion", 
+    @OneToMany(mappedBy = "evaluacionRelacion", 
         cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Pregunta> listaPreguntas = new ArrayList();        // Preguntas que tiene la evaluación
+    private List<Pregunta> listaPreguntas = new ArrayList<>();        // Preguntas que tiene la evaluación
 
 
-    /* Relacion que tiene con contenido, en este caso puede haber 
-    muchas evaluaciones en un contenido */
+    /* Relacion que tiene con contenido, en este caso 
+    puede haber muchas evaluaciones en un contenido */
     @ManyToOne
     @JsonBackReference
     @JoinColumn
     (name = "idContenido", nullable = false)
-    private Contenido contenido;
+    private Contenido contenido;        // Contenido por el que está relacionado Contenido
 
 
     private Date creacionEvaluacion;        // Fecha de creación de la evaluación

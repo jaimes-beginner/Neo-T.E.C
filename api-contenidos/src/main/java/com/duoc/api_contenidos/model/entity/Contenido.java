@@ -48,7 +48,7 @@ public class Contenido {
     contenido puede tener muchas evaluaciónes */
     @JsonManagedReference
     @OneToMany(mappedBy = "contenido", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Evaluacion> listaEvaluaciones = new ArrayList();
+    private List<Evaluacion> listaEvaluaciones = new ArrayList<>();
 
 
 }

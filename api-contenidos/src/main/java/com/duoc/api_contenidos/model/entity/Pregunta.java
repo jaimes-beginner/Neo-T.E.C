@@ -1,7 +1,5 @@
 package com.duoc.api_contenidos.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 /*------------------------------------------*/
 
 // Importaciones
@@ -13,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 
 /*------------------------------------------*/
@@ -46,5 +45,5 @@ public class Pregunta {
     @JsonBackReference
     @JoinColumn
     (name = "idEvaluacion", nullable = false)
-    private Evaluacion evaluacion;
+    private Evaluacion evaluacionRelacion;  // Evaluacion por el que se está relacionando Pregunta
 }
