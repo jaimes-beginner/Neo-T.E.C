@@ -27,6 +27,11 @@ public class ContenidoService {
         return contenidoRepo.findAll();
     }
 
+    // Obtener todos los contenidos por el id del curso
+    public List<Contenido> obtenerPorCurso(int idCurso) {
+        return contenidoRepo.findAllByIdCursoContenido(idCurso);
+    }
+
     // Obtener un contenido por su id 
     public Contenido obtenerUno(int id) {
         return contenidoRepo.findById(id).orElse(null);

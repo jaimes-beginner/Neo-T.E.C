@@ -28,6 +28,11 @@ public class EvaluacionService {
         return evaluacionRepo.findAll();
     }
 
+    // Obtener todas las evaluaciones por el id del contenido
+    public List<Evaluacion> obtenerPorContenido(int idContenido) {
+        return evaluacionRepo.findAllByIdContenido(idContenido);
+    }
+
     // Obtener una evaluacion por su id 
     public Evaluacion obtenerUno(int id) {
         return evaluacionRepo.findById(id).orElse(null);

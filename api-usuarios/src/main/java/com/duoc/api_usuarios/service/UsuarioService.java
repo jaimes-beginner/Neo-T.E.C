@@ -89,6 +89,4 @@ public class UsuarioService {
         return usuarioRepo.save(usuarioModificar);
     }
 
-    // Considerar la opción para logear en un futuro...
-
 }

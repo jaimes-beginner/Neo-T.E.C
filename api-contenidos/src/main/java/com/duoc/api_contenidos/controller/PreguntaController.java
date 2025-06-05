@@ -35,6 +35,12 @@ public class PreguntaController {
         return preguntaServ.obtenerTodos();
     }
 
+    // Obtener todos las preguntas por el id de la evaluación
+    @GetMapping("/allByEvaluations/{idEvaluacion}")
+    public List<Pregunta> obtenerPorEvaluacion(@PathVariable int idEvaluacion) {
+        return preguntaServ.obtenerPorEvaluacion(idEvaluacion);
+    }
+
     // Obtener una pregunta por su id 
     @GetMapping("/{id}")
     public Pregunta obtenerUno(@PathVariable int id) {

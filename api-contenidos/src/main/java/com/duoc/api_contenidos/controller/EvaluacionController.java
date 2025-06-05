@@ -35,6 +35,12 @@ public class EvaluacionController {
         return evaluacionServ.obtenerTodos();
     }
 
+    // Obtener todas las evaluaciones por el id del contenido
+    @GetMapping("/allByContent/{idContent}")
+    public List<Evaluacion> obtenerPorContenido(int idContent) {
+        return evaluacionServ.obtenerPorContenido(idContent);
+    }
+
     // Obtener una evaluacion por su id 
     @GetMapping("/{id}")
     public Evaluacion obtenerUno(@PathVariable int id) {
