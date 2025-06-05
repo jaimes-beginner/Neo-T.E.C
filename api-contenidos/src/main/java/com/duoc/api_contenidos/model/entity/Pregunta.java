@@ -27,17 +27,13 @@ public class Pregunta {
     private int idPregunta;                 // Identificador de la pregunta
 
     @Column(nullable = false)
-    private int idEvaluacionPregunta;       // Id de la evaluación a la le pertenece esta la pegúnta
-
-    @Column(nullable = false)
     private String enunciadoPregunta;       // Enunciado de la pregunta
 
     @Column(nullable = false)
     private String opcionesPregunta;        // Opciones-alternativas de la pregunta
 
     @Column(nullable = false)
-    private String respCorrectaPregunta;    // La respuesta correcta
-
+    private String opcionesCorrectaPregunta;    // opcion-alternativa correcta
     
     // Puede haber muchas pregunta en una evaluacion
     @ManyToOne

@@ -1,4 +1,4 @@
-package com.duoc.api_contenidos.config;
+package com.duoc.api_inscripciones.config;
 
 /*------------------------------------------*/
 
@@ -12,11 +12,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfig {
     
-    // Puerto hacia cursos: 8083
-
     @Bean
-    public WebClient cursosWebClient() {
-        return WebClient.builder().baseUrl("http://localhost:8083") .build();
+    public WebClient webClient(WebClient.Builder builder) {
+        return builder.build();
     }
 
 }

@@ -33,9 +33,6 @@ public class Evaluacion {
     private int idEvaluacion;               // Identificador de la evaluación
 
     @Column(nullable = false)
-    private int idCursoEvaluacion;          // Id del curso a la que está asociada la evaluacion
-
-    @Column(nullable = false)
     private String tipoEvaluacion;          // Tipo de evaluación (quiz, final)
 
     private Date creacionEvaluacion;        // Fecha de creación de la evaluación

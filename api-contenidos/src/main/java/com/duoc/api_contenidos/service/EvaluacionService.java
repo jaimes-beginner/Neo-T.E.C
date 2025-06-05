@@ -10,8 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import com.duoc.api_contenidos.model.entity.Evaluacion;
+import com.duoc.api_contenidos.model.entity.Pregunta;
 import com.duoc.api_contenidos.model.request.EvaluacionCreate;
 import com.duoc.api_contenidos.model.request.EvaluacionUpdate;
+
 import com.duoc.api_contenidos.repository.EvaluacionRepository;
 
 /*------------------------------------------*/
@@ -38,14 +40,31 @@ public class EvaluacionService {
         return evaluacionRepo.findById(id).orElse(null);
     }
 
-    // Agregar una evaluacion
+    // Agregar una evaluacion con sus respectivas pregúntas
     public Evaluacion agregar(EvaluacionCreate datosCrear) {
         Evaluacion evaluacion = new Evaluacion();
         try {
+
+            // Setteando los datos de la evaluación
             evaluacion.setCreacionEvaluacion(new Date());
             evaluacion.setTipoEvaluacion(datosCrear.getTipoEvaluacion());
-            evaluacion.setIdCursoEvaluacion(datosCrear.getIdCursoEvaluacion());
+
+            // Setteando los datos de la pregúnta/s, que están como un atributo en EvaluacionCreate
+            List<Pregunta> listaPreguntas = datosCrear.getListaPreguntas().stream().map(pdto -> {
+                Pregunta pregunta = new Pregunta();
+                pregunta.setEnunciadoPregunta(pdto.getEnunciadoPregunta());
+                pregunta.setOpcionesPregunta(pdto.getOpcionesPregunta());
+                pregunta.setOpcionesCorrectaPregunta(pdto.getRespCorrectaPregunta());
+                pregunta.setEvaluacionRelacion(evaluacion);
+                return pregunta;
+            }).toList();
+
+            // Asignando la lista de preguntas a la evaluacion
+            evaluacion.setListaPreguntas(listaPreguntas);
+
+            // Guardando los cambios de la evaluación
             return evaluacionRepo.save(evaluacion);
+
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
@@ -65,9 +84,6 @@ public class EvaluacionService {
         Evaluacion evaluacion = obtenerUno(datosModificar.getIdEvaluacion());
         if(evaluacion == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        if(datosModificar.getIdCursoEvaluacion() != null) {
-            evaluacion.setIdCursoEvaluacion(datosModificar.getIdCursoEvaluacion());
         }
         if(datosModificar.getTipoEvaluacion() != null) {
             evaluacion.setTipoEvaluacion(datosModificar.getTipoEvaluacion());
