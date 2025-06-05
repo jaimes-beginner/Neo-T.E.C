@@ -58,14 +58,14 @@ public class ContenidoController {
     @DeleteMapping("/remove/{id}")
     public String eliminar(@PathVariable int id) {
         contenidoServ.eliminar(id);
-        return "Pregunta eliminada!";
+        return "Contenido eliminado!";
     }
 
     // Modificar un contenido
     @PutMapping("/{id}")
     public String modificar(@Valid @RequestBody ContenidoUpdate datosModificar) {
         contenidoServ.modificar(datosModificar);
-        return "Pregunta modificada";
+        return "Contenido modificado";
     }
 
 }
