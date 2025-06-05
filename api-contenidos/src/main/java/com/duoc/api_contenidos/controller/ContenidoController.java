@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.duoc.api_contenidos.model.entity.Contenido;
 import com.duoc.api_contenidos.model.request.ContenidoCreate;
 import com.duoc.api_contenidos.model.request.ContenidoUpdate;
+import com.duoc.api_contenidos.model.request.CursoDTO;
 import com.duoc.api_contenidos.service.ContenidoService;
 import jakarta.validation.Valid;
 
@@ -37,8 +38,8 @@ public class ContenidoController {
 
     // Obtener todos los contenidos por el id del curso
     @GetMapping("/allByCourse/{idCurso}")
-    public List<Contenido> obtenerPorCurso(@PathVariable int idCurso) {
-        return contenidoServ.obtenerPorCurso(idCurso);
+    public CursoDTO obtenerPorCurso(@PathVariable int idContenido) {
+        return contenidoServ.obtenerPorCurso(idContenido);
     }
 
     // Obtener un contenido por su id 

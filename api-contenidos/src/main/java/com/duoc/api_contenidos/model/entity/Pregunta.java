@@ -39,11 +39,10 @@ public class Pregunta {
     private String respCorrectaPregunta;    // La respuesta correcta
 
     
-    /* Relacion que tiene con contenido, en este caso
-    pueden haber muchas preguntas en una evaluación */
+    // Puede haber muchas pregunta en una evaluacion
     @ManyToOne
     @JsonBackReference
-    @JoinColumn
-    (name = "idEvaluacion", nullable = false)
-    private Evaluacion evaluacionRelacion;  // Evaluacion por el que se está relacionando Pregunta
+    @JoinColumn(name = "idEvaluacion", nullable = false)
+    private Evaluacion evaluacionRelacion;  
+    
 }

@@ -41,11 +41,10 @@ public class Contenido {
     private String tituloContenido;         // Titulo del contenido
     
     @Column(nullable = false)
-    private int idCursoContenido;           // En que curso pertenece este contenido
+    private int idCursoContenido;           // Referencia al curso (está en otro microservicio)
     
 
-    /* Relacion que tiene con evaluación, en este caso un 
-    contenido puede tener muchas evaluaciónes */
+    // Contenido puede tener muchas evaluaciones
     @JsonManagedReference
     @OneToMany(mappedBy = "contenido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Evaluacion> listaEvaluaciones = new ArrayList<>();
