@@ -25,28 +25,62 @@ public class InscripcionService {
     @Autowired
     private InscripcionRepository inscripcionRepo;
 
+    // Elementos para el WebClient (comunicación entre microservicios)
+    private final WebClient webClient;
+    InscripcionService(WebClient webClient) {
+        this.webClient = webClient;
+    }
+
+
 
     // Obtener todos los inscripción
     public List<Inscripcion> obtenerTodos() {
         return inscripcionRepo.findAll();
     }
 
-
     // Obtener todas las inscripciones por el id del usuario
     public List<Inscripcion> obtenerPorUsuario(int idUsuario) {
         return inscripcionRepo.findAllByIdUsuarioInscripcion(idUsuario);
     }
-
 
     // Obtener una inscripcion por su id 
     public Inscripcion obtenerUno(int id) {
         return inscripcionRepo.findById(id).orElse(null);
     }
 
+    // Verificar si el usuario existe, devolviendo true o false
+    public Boolean existenciaUsuario(int idUsuario) {
+        try {
+            return Boolean.TRUE.equals(webClient.get().uri("http://localhost:8080/users/" + idUsuario)
+            .retrieve().bodyToMono(UsuarioDTO.class).block() != null);
+            
+        }  catch (WebClientResponseException.NotFound e) {
+            return false;
+        }
+    }
 
-    // Inscribir a un usuario
+    // Verificar si el curso existe, devolviendo true o false
+    public Boolean existenciaCurso(int idCurso) {
+        try {
+            return Boolean.TRUE.equals(webClient.get().uri("http://localhost:8081/users/" + idCurso)
+            .retrieve().bodyToMono(CursoDTO.class).block() != null);
+            
+        }  catch (WebClientResponseException.NotFound e) {
+            return false;
+        }
+    }
+
+    // Inscribir a un usuario, verificando si en primer lugar existe el mismo y el curso
     public Inscripcion agregar(int idUsuario, int idCurso) {
         Inscripcion inscripcion = new Inscripcion();
+
+        if(!existenciaUsuario(idUsuario)) {
+            throw new IllegalArgumentException("Usuario no encontrado");
+        }
+        if(!existenciaCurso(idCurso)) {
+            throw new IllegalArgumentException("Curso no encontrado");
+        }
+
         try {
             inscripcion.setFechaInscripcion(new Date());
             inscripcion.setEstadoInscripcion(true);
@@ -57,31 +91,6 @@ public class InscripcionService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
-
-
-    // Verificar si el usuario existe, devolviendo true o false
-    public Boolean existenciaUsuario(int idUsuario) {
-        try {
-            return Boolean.TRUE.equals(webClient.get().uri("http://localhost:8080/users/{id}",idUsuario)
-            .retrieve().bodyToMono(UsuarioDTO.class).block() != null);
-            
-        }  catch (WebClientResponseException.NotFound e) {
-            return false;
-        }
-    }
-
-
-    // Verificar si el curso existe, devolviendo true o false
-    public Boolean existencia(int idCurso) {
-        try {
-            return Boolean.TRUE.equals(webClient.get().uri("http://localhost:8081/users/{id}",idCurso)
-            .retrieve().bodyToMono(CursoDTO.class).block() != null);
-            
-        }  catch (WebClientResponseException.NotFound e) {
-            return false;
-        }
-    }
-
 
     // Eliminar una inscripción
     public void eliminar(int id) {

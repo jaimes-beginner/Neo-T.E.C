@@ -34,7 +34,7 @@ public class InscripcionController {
         return inscripcionServ.obtenerUno(id);
     }
 
-    // Obtener inscripciones por su id
+    // Obtener inscripciones de un usuario por su id 
     @GetMapping("/{idUsuario}")
     public List<Inscripcion> obtenerPorUsuario(@PathVariable int idUsuario) {
         return inscripcionServ.obtenerPorUsuario(idUsuario);
