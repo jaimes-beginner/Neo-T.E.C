@@ -39,6 +39,11 @@ public class UsuarioService {
         return usuarioRepo.findById(id).orElse(null);
     }
 
+    // Obtener un usuario por su email
+    public Usuario obtenerPorEmail(String email) {
+        return usuarioRepo.findAByCorreoUsuario(email);
+    }
+
     // Agregar un usuario
     public Usuario agregar(UsuarioCreate datosCrear) {
         Usuario usuario = new Usuario();

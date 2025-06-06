@@ -60,11 +60,4 @@ public class EvaluacionController {
         return "Pregunta eliminada!";
     }
 
-    // Modificar una evaluacion
-    @PutMapping("/{id}")
-    public String modificar(@Valid @RequestBody EvaluacionUpdate datosModificar) {
-        evaluacionServ.modificar(datosModificar);
-        return "Pregunta modificada";
-    }
-    
 }

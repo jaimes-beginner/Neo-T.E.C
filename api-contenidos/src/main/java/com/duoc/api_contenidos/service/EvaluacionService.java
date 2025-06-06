@@ -12,8 +12,6 @@ import org.springframework.web.server.ResponseStatusException;
 import com.duoc.api_contenidos.model.entity.Evaluacion;
 import com.duoc.api_contenidos.model.entity.Pregunta;
 import com.duoc.api_contenidos.model.request.EvaluacionCreate;
-import com.duoc.api_contenidos.model.request.EvaluacionUpdate;
-
 import com.duoc.api_contenidos.repository.EvaluacionRepository;
 
 /*------------------------------------------*/
@@ -40,7 +38,7 @@ public class EvaluacionService {
         return evaluacionRepo.findById(id).orElse(null);
     }
 
-    // Agregar una evaluacion con sus respectivas pregúntas
+    // Crear-agregar una evaluacion con sus respectivas pregúntas
     public Evaluacion agregar(EvaluacionCreate datosCrear) {
         Evaluacion evaluacion = new Evaluacion();
         try {
@@ -49,7 +47,7 @@ public class EvaluacionService {
             evaluacion.setCreacionEvaluacion(new Date());
             evaluacion.setTipoEvaluacion(datosCrear.getTipoEvaluacion());
 
-            // Setteando los datos de la pregúnta/s, que están como un atributo en EvaluacionCreate
+            // Setteando los datos de la/s pregúnta/s, que están como un atributo en EvaluacionCreate
             List<Pregunta> listaPreguntas = datosCrear.getListaPreguntas().stream().map(pdto -> {
                 Pregunta pregunta = new Pregunta();
                 pregunta.setEnunciadoPregunta(pdto.getEnunciadoPregunta());
@@ -77,18 +75,6 @@ public class EvaluacionService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         evaluacionRepo.deleteById(id);
-    }
-
-    // Modificar una evaluacion
-    public Evaluacion modificar(EvaluacionUpdate datosModificar) {
-        Evaluacion evaluacion = obtenerUno(datosModificar.getIdEvaluacion());
-        if(evaluacion == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        if(datosModificar.getTipoEvaluacion() != null) {
-            evaluacion.setTipoEvaluacion(datosModificar.getTipoEvaluacion());
-        }
-        return evaluacionRepo.save(evaluacion);
     }
 
 }

@@ -16,13 +16,5 @@ public class CursoDTO {
     private String tituloCurso;             // Titulo del curso
 
     private String descripcionCurso;        // Descripción del curso
-
-    private String categoriaCurso;          // Categoria del curso
-
-    private Boolean estadoCurso;            // Estado del curso
-
-    private Date creacionCurso;             // Fecha de creación del curso
-
-    private int idIntructorCurso;           // Instructor del curso
     
 }

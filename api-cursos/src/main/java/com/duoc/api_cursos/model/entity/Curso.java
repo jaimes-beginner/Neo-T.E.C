@@ -33,7 +33,7 @@ public class Curso {
     @Column(nullable = false)
     private String categoriaCurso;          // Categoria del curso
 
-    private Boolean estadoCurso;            // Estado del curso
+    private String estadoCurso;            // Estado del curso
 
     private Date creacionCurso;             // Fecha de creación del curso
 

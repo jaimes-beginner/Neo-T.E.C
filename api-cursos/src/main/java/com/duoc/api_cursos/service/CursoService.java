@@ -42,7 +42,7 @@ public class CursoService {
     public Curso agregar(CursoCreate datosCrear) {
         Curso curso = new Curso();
         try{
-            curso.setEstadoCurso(true);
+            curso.setEstadoCurso("En borrador");
             curso.setCreacionCurso(new Date());
             curso.setTituloCurso(datosCrear.getTituloCurso());
             curso.setDescripcionCurso(datosCrear.getDescripcionCurso());
@@ -54,14 +54,23 @@ public class CursoService {
         }
     }
 
+    // Publicar un curso
+    public Curso publicarUnCurso(int id) {
+        Curso cursoPublicar = obtenerUno(id);
+        if(cursoPublicar == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        cursoPublicar.setEstadoCurso("Publicado");
+        return cursoRepo.save(cursoPublicar);
+    }   
+
     // Eliminar un curso por su id
     public void eliminar(int id) {
         Curso curso = obtenerUno(id);
         if(curso == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        curso.setEstadoCurso(false);
-        cursoRepo.save(curso);
+        cursoRepo.delete(curso);
     }
 
     // Modificar un curso por su id (datosModificar)

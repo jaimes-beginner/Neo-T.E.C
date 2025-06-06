@@ -24,13 +24,10 @@ public class InscripcionService {
     // Autowired
     @Autowired
     private InscripcionRepository inscripcionRepo;
-
-    // Elementos para el WebClient (comunicación entre microservicios)
-    private final WebClient webClient;
-    InscripcionService(WebClient webClient) {
-        this.webClient = webClient;
-    }
-
+    @Autowired
+    private WebClient usuarioWebClient;
+    @Autowired
+    private WebClient cursoWebClient;
 
 
     // Obtener todos los inscripción
@@ -51,7 +48,7 @@ public class InscripcionService {
     // Verificar si el usuario existe, devolviendo true o false
     public Boolean existenciaUsuario(int idUsuario) {
         try {
-            return Boolean.TRUE.equals(webClient.get().uri("http://localhost:8080/users/" + idUsuario)
+            return Boolean.TRUE.equals(usuarioWebClient.get().uri("http://localhost:8080/users/" + idUsuario)
             .retrieve().bodyToMono(UsuarioDTO.class).block() != null);
             
         }  catch (WebClientResponseException.NotFound e) {
@@ -62,7 +59,7 @@ public class InscripcionService {
     // Verificar si el curso existe, devolviendo true o false
     public Boolean existenciaCurso(int idCurso) {
         try {
-            return Boolean.TRUE.equals(webClient.get().uri("http://localhost:8081/users/" + idCurso)
+            return Boolean.TRUE.equals(cursoWebClient.get().uri("http://localhost:8081/users/" + idCurso)
             .retrieve().bodyToMono(CursoDTO.class).block() != null);
             
         }  catch (WebClientResponseException.NotFound e) {

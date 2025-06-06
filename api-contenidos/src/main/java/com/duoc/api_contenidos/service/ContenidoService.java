@@ -19,16 +19,13 @@ import com.duoc.api_contenidos.repository.ContenidoRepository;
 
 @Service
 public class ContenidoService {
-
-    private final WebClient cursosWebClient;
     
     // Atributos
     @Autowired
     private ContenidoRepository contenidoRepo;
 
-    ContenidoService(WebClient cursosWebClient) {
-        this.cursosWebClient = cursosWebClient;
-    }
+    @Autowired
+    private WebClient cursosWebClient;
 
     // Obtener todos los contenidos
     public List<Contenido> obtenerTodos() {
@@ -40,7 +37,7 @@ public class ContenidoService {
         return contenidoRepo.findById(id).orElse(null);
     }
 
-    // Obtener todos los contenidos por el id del curso
+    // Obtener contenidos por el id del curso
     public CursoDTO obtenerPorCurso(int idContenido) {
         Contenido contenido = obtenerUno(idContenido);
         if(contenido == null) {
@@ -53,10 +50,14 @@ public class ContenidoService {
                 .retrieve().bodyToMono(CursoDTO.class).block();
     }
 
-
     // Agregar un contenido
     public Contenido agregar(ContenidoCreate datosCrear) {
         Contenido contenido = new Contenido();
+
+        // Verificar que si existe el curso
+        cursosWebClient.get().uri("/courses/" + datosCrear.getIdCursoContenido())
+                        .retrieve().toBodilessEntity().block();
+
         try {
             contenido.setIdCursoContenido(datosCrear.getIdCursoContenido());
             contenido.setTipoContenido(datosCrear.getTipoContenido());
