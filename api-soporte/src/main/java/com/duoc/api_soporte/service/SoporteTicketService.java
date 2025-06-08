@@ -22,7 +22,7 @@ public class SoporteTicketService {
     @Autowired
     private SoporteTicketRepository soporteRepo;
 
-    // Obtener todas los Tickets
+    // Obtener todos los Tickets
     public List<SoporteTicket> obtenerTodos(){
         return soporteRepo.findAll();
     }
@@ -41,8 +41,5 @@ public class SoporteTicketService {
     soporteTi.setEstadoTicket("Canceled");
     soporteRepo.save(soporteTi);
     }
-
-
-
     
 }
