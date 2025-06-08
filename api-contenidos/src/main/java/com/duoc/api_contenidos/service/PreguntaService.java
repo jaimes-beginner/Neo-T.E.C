@@ -26,8 +26,8 @@ public class PreguntaService {
     }
 
     // Obtener todas las preguntas por el id de la evaluación
-    public List<Pregunta> obtenerPorEvaluacion(int IdEvaluacion) {
-        return preguntaRepo.findAllByIdEvaluacionPregunta(IdEvaluacion);
+    public List<Pregunta> obtenerPorEvaluacion(int idEvaluacion) {
+        return preguntaRepo.findAllByIdEvaluacionPregunta(idEvaluacion);
     }
 
     // Obtener una pregunta por su id 
