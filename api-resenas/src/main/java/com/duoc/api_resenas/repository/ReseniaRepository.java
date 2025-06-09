@@ -1,4 +1,4 @@
-package com.duoc.api_soporte.repository;
+package com.duoc.api_resenas.repository;
 /*------------------------------------------*/
 
 // Importaciones
@@ -6,14 +6,16 @@ package com.duoc.api_soporte.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.duoc.api_soporte.model.entities.SoporteTicket;
+import com.duoc.api_resenas.models.entities.Resenia;
+
 /*------------------------------------------*/
+
 @Repository
-public interface SoporteTicketRepository extends JpaRepository<SoporteTicket,Integer>{
+public interface ReseniaRepository extends JpaRepository<Resenia,Integer> {
 
     // Métodos para acceder a los datos de la base de datos...
-    SoporteTicket findByIdTicket(int idTicket);
+    Resenia findByIdResenias(int idResenia);
+
+
     
-
-
 }

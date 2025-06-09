@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.duoc.api_soporte.model.entities.SoporteTicket;
+import com.duoc.api_soporte.model.request.SoporteTicketCreate;
 import com.duoc.api_soporte.repository.SoporteTicketRepository;
 
 /*------------------------------------------*/
@@ -42,4 +43,14 @@ public class SoporteTicketService {
     soporteRepo.save(soporteTi);
     }
     
+    // Deja un Ticket
+    public SoporteTicket dejarResena(SoporteTicketCreate sopT) {
+        SoporteTicket so= new SoporteTicket();
+        so.setEstadoTicket(sopT.getEstadoTicket());
+        so.setTemaTicket(sopT.getIncidenteTicket());
+        return soporteRepo.save(so);
+    }
+
+
+
 }

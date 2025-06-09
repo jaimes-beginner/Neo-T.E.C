@@ -6,8 +6,6 @@ import lombok.Data;
 @Data
 public class SoporteTicketCreate {
      
-    @NotBlank
-    private String enunciadoTicket;       // Enunciado del Ticket
 
     @NotBlank
     private String estadoTicket;        // Opciones-Estado del Ticket
