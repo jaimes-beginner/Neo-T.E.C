@@ -3,7 +3,6 @@ package com.duoc.api_contenidos.model.request;
 /*------------------------------------------*/
 
 // Importaciones
-import java.util.Date;
 import lombok.Data;
 
 /*------------------------------------------*/
