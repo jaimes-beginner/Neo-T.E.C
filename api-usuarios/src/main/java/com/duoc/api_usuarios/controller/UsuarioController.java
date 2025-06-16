@@ -40,12 +40,6 @@ public class UsuarioController {
         return usuarioServ.obtenerActivos();
     }
 
-    // Obtener un usuario por su id 
-    @GetMapping("/{id}")
-    public Usuario obtenerUno(@PathVariable int id) {
-        return usuarioServ.obtenerUno(id);
-    }
-
     // Registrar un usuario
     @PostMapping("/auth/register")
     public Usuario registrar(@Valid @RequestBody UsuarioCreate datosCrear) {

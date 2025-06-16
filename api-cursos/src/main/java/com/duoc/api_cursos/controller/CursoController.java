@@ -40,12 +40,6 @@ public class CursoController {
         return cursoServ.obtenerActivos();
     }
 
-    // Obtener un curso por su id 
-    @GetMapping("/{id}")
-    public Curso obtenerUno(@PathVariable int id) {
-        return cursoServ.obtenerUno(id);
-    }
-
     // Agregar un curso
     @PostMapping("/add")
     public Curso agregar(@Valid @RequestBody CursoCreate datosCrear) {

@@ -39,12 +39,6 @@ public class EvaluacionController {
         return evaluacionServ.obtenerPorContenido(idContent);
     }
 
-    // Obtener una evaluacion por su id 
-    @GetMapping("/{id}")
-    public Evaluacion obtenerUno(@PathVariable int id) {
-        return evaluacionServ.obtenerUno(id);
-    }
-
     // Agregar una evaluacion
     @PostMapping("/add")
     public Evaluacion agregar(@Valid @RequestBody EvaluacionCreate datosCrear) {

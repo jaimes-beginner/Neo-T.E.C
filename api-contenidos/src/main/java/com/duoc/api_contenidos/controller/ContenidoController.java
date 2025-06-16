@@ -37,15 +37,9 @@ public class ContenidoController {
     }
 
     // Obtener todos los contenidos por el id del curso
-    @GetMapping("/allByCourse/{idCurso}")
+    @GetMapping("/allByCourse/{idContenido}")
     public CursoDTO obtenerPorCurso(@PathVariable int idContenido) {
         return contenidoServ.obtenerPorCurso(idContenido);
-    }
-
-    // Obtener un contenido por su id 
-    @GetMapping("/{id}")
-    public Contenido obtenerUno(@PathVariable int id) {
-        return contenidoServ.obtenerUno(id);
     }
 
     // Agregar un contenido

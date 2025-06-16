@@ -35,12 +35,6 @@ public class PreguntaController {
         return preguntaServ.obtenerPorEvaluacion(idEvaluacion);
     }
 
-    // Obtener una pregunta por su id 
-    @GetMapping("/{id}")
-    public Pregunta obtenerUno(@PathVariable int id) {
-        return preguntaServ.obtenerUno(id);
-    }
-
     // Eliminar una pregunta
     @DeleteMapping("/remove/{id}")
     public String eliminar(@PathVariable int id) {
