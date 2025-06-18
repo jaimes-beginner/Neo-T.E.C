@@ -40,10 +40,10 @@ public class SoporteTicketService {
     public SoporteTicket crearTicket(SoporteTicketCreate datosCrear) {
         SoporteTicket nuevoTicket = new SoporteTicket();
         try {
-        nuevoTicket.setFechaTicket(new Date());
-        nuevoTicket.setTemaTicket(datosCrear.getIncidenteTicket());
-        nuevoTicket.setEstadoTicket(datosCrear.getEstadoTicket());
-        return soporteRepo.save(nuevoTicket);
+            nuevoTicket.setFechaTicket(new Date());
+            nuevoTicket.setTemaTicket(datosCrear.getIncidenteTicket());
+            nuevoTicket.setEstadoTicket(datosCrear.getEstadoTicket());
+            return soporteRepo.save(nuevoTicket);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }

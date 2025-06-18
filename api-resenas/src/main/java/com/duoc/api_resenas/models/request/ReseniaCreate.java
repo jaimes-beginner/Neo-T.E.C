@@ -1,9 +1,13 @@
 package com.duoc.api_resenas.models.request;
 
+/*------------------------------------------*/
 
+// Importaciones
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+
+/*------------------------------------------*/
 
 @Data
 public class ReseniaCreate {
@@ -12,5 +16,5 @@ public class ReseniaCreate {
     private String textoResenia;            // Cuerpo de la reseña
 
     @NotNull
-    private int puntuacionResenia;          //Nota de la Reseña
+    private int puntuacionResenia;          // Nota de la Reseña
 }
