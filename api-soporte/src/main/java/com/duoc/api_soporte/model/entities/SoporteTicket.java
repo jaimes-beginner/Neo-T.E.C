@@ -2,6 +2,7 @@ package com.duoc.api_soporte.model.entities;
 /*------------------------------------------*/
 
 // Importaciones
+import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class SoporteTicket {
     @Column(nullable = false)
     private String estadoTicket;        // Estado del Ticket 
     
-
+    private Date fechaTicket;           // Fecha en la que se hizo el ticket
 
 
 }
