@@ -1,15 +1,12 @@
 package com.duoc.api_inscripciones.repository;
 
-import java.util.List;
-
 /*------------------------------------------*/
 
 // Importaciones
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.duoc.api_inscripciones.model.entity.Inscripcion;
-
-import jakarta.persistence.Column;
 
 /*------------------------------------------*/
 
