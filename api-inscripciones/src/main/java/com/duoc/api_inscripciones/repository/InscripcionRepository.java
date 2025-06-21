@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.duoc.api_inscripciones.model.entity.Inscripcion;
 
+import jakarta.persistence.Column;
+
 /*------------------------------------------*/
 
 @Repository
@@ -16,4 +18,5 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Intege
 
     // Métodos apra acceder a la base de datos
     List<Inscripcion> findAllByIdUsuarioInscripcion(int idUsuarioInscripcion);
+    Boolean existsByIdUsuarioInscripcionAndIdCursoInscripcion(int idUsuario, int idCurso);
 }

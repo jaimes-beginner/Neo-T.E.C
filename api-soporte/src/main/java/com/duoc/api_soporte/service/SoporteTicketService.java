@@ -34,8 +34,6 @@ public class SoporteTicketService {
         return soporteRepo.findById(id).orElse(null);
     }
 
-    /*--------------------------------------------------*/
-
     // Crear un nuevo ticket 
     public SoporteTicket crearTicket(SoporteTicketCreate datosCrear) {
         SoporteTicket nuevoTicket = new SoporteTicket();
@@ -58,5 +56,7 @@ public class SoporteTicketService {
         soporteModificar.setEstadoTicket(datosModificar.getEstadoTicket());
         soporteRepo.save(soporteModificar);
     }
+
+    // Considerar listar tickets por un usuario en específico...
 
 }

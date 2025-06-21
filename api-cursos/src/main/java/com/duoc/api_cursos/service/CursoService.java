@@ -38,6 +38,7 @@ public class CursoService {
         return cursoRepo.findById(id).orElse(null);
     }
 
+    // Considerar asociar a un profesor en la clase...
     // Agregar un curso
     public Curso agregar(CursoCreate datosCrear) {
         Curso curso = new Curso();

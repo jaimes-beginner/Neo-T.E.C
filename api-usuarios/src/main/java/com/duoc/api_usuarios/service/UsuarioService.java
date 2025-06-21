@@ -47,6 +47,13 @@ public class UsuarioService {
     // Agregar un usuario
     public Usuario agregar(UsuarioCreate datosCrear) {
         Usuario usuario = new Usuario();
+
+        // Verificar si el correo ya está en uso (true o false)
+        if(usuarioRepo.existsByCorreoUsuario(datosCrear.getCorreoUsuario())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Este correo ya está registrado");
+        }
+
+        // Setteando los datos de usuario
         try {
             usuario.setEstadoUsuario(true);
             usuario.setFechaRegistro(new Date());
@@ -77,7 +84,7 @@ public class UsuarioService {
     }
 
     // Modificar la información de un usuario por su id (datosModificar)
-    public Usuario modificar(UsuarioUpdate datosModificar) {
+    public void modificar(UsuarioUpdate datosModificar) {
         Usuario usuarioModificar = obtenerUno(datosModificar.getIdUsuario());
         if(usuarioModificar == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -91,7 +98,7 @@ public class UsuarioService {
         if(datosModificar.getPasswordUsuario() != null) {
             usuarioModificar.setPasswordUsuario(datosModificar.getPasswordUsuario());
         }
-        return usuarioRepo.save(usuarioModificar);
+        usuarioRepo.save(usuarioModificar);
     }
 
 }

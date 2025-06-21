@@ -32,17 +32,27 @@ public class ReseniaService {
         return reseniaRepo.findById(id).orElse(null);
     }
 
-    // Deja una reseña
+    // Dejar una reseña
     public Resenia dejarResena(ReseniaCreate resena) {
         Resenia resenia = new Resenia();
+
+        // Validnado que la putuación de la reseña sea correcta
+        if(resena.getPuntuacionResenia() < 1 || resena.getPuntuacionResenia() > 5) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"La puntuación de la reseña debe ser entre 1 y 5");
+        }
+
+        // Setteando los datos de la reseña
         try {
             resenia.setPuntuacionResenia(resena.getPuntuacionResenia());
             resenia.setTextoResenia(resena.getTextoResenia());
             resenia.setFechaResenia(new Date());
             return reseniaRepo.save(resenia);
+
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
+
+    // Considerar calcular el promedio de las reseñas por curso...
 
 }

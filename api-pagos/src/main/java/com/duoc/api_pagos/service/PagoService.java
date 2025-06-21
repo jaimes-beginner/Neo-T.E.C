@@ -56,8 +56,8 @@ public class PagoService {
             pago.setIdUsuarioPago(datosCrear.getIdUsuarioPago());
             pago.setIdCursoPago(datosCrear.getIdCursoPago());
             pago.setMontoPago(datosCrear.getMontoPago());
-
             return pagoRepo.save(pago);
+            
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }

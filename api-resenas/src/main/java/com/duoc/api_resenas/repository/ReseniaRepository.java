@@ -14,5 +14,6 @@ import com.duoc.api_resenas.models.entities.Resenia;
 public interface ReseniaRepository extends JpaRepository<Resenia,Integer> {
 
     // Métodos para acceder a los datos de la base de datos...
+    
 
 }

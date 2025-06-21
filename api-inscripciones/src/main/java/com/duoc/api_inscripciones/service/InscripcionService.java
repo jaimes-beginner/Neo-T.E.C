@@ -71,6 +71,12 @@ public class InscripcionService {
     public Inscripcion agregar(int idUsuario, int idCurso) {
         Inscripcion inscripcion = new Inscripcion();
 
+        // Verificar que no haya inscripciones dubplicadas
+        if(inscripcionRepo.existsByIdUsuarioInscripcionAndIdCursoInscripcion(idUsuario, idCurso)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ya estás inscrito");
+        }
+
+        // Verificar que los datos colocados en verdad existan para hacer la inscripcion
         if(!existenciaUsuario(idUsuario)) {
             throw new IllegalArgumentException("Usuario no encontrado");
         }
@@ -78,6 +84,7 @@ public class InscripcionService {
             throw new IllegalArgumentException("Curso no encontrado");
         }
 
+        // Setteando los datos los cursos
         try {
             inscripcion.setFechaInscripcion(new Date());
             inscripcion.setEstadoInscripcion(true);
