@@ -13,7 +13,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class WebClientConfig {
     
     // Puerto hacia cursos: 8083
-
     @Bean
     public WebClient cursosWebClient() {
         return WebClient.builder().baseUrl("http://localhost:8083") .build();

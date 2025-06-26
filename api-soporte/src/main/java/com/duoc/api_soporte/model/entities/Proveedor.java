@@ -21,7 +21,7 @@ public class Proveedor {
     @Id
     @GeneratedValue
     (strategy = GenerationType.IDENTITY)
-    private Long idProveedor;                       // Identificador del proveedor
+    private int idProveedor;                       // Identificador del proveedor
 
     @Column(nullable = false)
     private String nombreProveedor;                 // Nombre del proveedor
@@ -37,6 +37,6 @@ public class Proveedor {
     @Column(length = 1000)
     private String descripcionServicioProveedor;    // Descripcion del servicio que ofrece
 
-    private boolean estadoProveedor;                // Estado del proveedor
+    private Boolean estadoProveedor;                // Estado del proveedor
 
 }

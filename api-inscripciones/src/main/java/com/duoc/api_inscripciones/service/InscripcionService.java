@@ -71,7 +71,7 @@ public class InscripcionService {
     public Inscripcion agregar(int idUsuario, int idCurso) {
         Inscripcion inscripcion = new Inscripcion();
 
-        // Verificar que no haya inscripciones dubplicadas
+        // Verificar que no haya inscripciones duplicadas
         if(inscripcionRepo.existsByIdUsuarioInscripcionAndIdCursoInscripcion(idUsuario, idCurso)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ya estás inscrito");
         }
