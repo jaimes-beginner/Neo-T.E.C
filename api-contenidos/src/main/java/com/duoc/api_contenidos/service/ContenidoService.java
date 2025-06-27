@@ -53,17 +53,23 @@ public class ContenidoService {
     // Agregar un contenido
     public Contenido agregar(ContenidoCreate datosCrear) {
         Contenido contenido = new Contenido();
+        try {
+            // Verificar que este curso exista
+            cursosWebClient.get().uri("/courses/" + datosCrear.getIdCursoContenido())
+                            .retrieve().toBodilessEntity().block();
 
-        // Verificar que si existe el curso
-        cursosWebClient.get().uri("/courses/" + datosCrear.getIdCursoContenido())
-                        .retrieve().toBodilessEntity().block();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
 
         try {
+            // Setteando los datos del contenido de cursos
             contenido.setIdCursoContenido(datosCrear.getIdCursoContenido());
             contenido.setTipoContenido(datosCrear.getTipoContenido());
             contenido.setTituloContenido(datosCrear.getTituloContenido());
             contenido.setUrlContenido(datosCrear.getUrlContenido());
             return contenidoRepo.save(contenido);
+
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }

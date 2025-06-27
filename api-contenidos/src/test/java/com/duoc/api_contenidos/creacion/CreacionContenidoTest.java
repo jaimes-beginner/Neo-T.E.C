@@ -12,10 +12,13 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.server.ResponseStatusException;
 import com.duoc.api_contenidos.model.entity.Contenido;
 import com.duoc.api_contenidos.model.request.ContenidoCreate;
@@ -25,6 +28,7 @@ import reactor.core.publisher.Mono;
 
 /*------------------------------------------------*/
 
+@ExtendWith(MockitoExtension.class)
 public class CreacionContenidoTest {
 
     // Simulamos el repositorio de contenido, no accede a la base de datos real
@@ -101,11 +105,11 @@ public class CreacionContenidoTest {
         when(requestSpec.uri("/courses/" + datos.getIdCursoContenido())).thenReturn(requestSpec);
         when(requestSpec.retrieve()).thenReturn(responseSpec);
 
-        /*
+    
         // Aquí simulamos que cuando se hace `.block()`, lanza una excepción como si fuera 404
         when(responseSpec.toBodilessEntity()).thenThrow(new WebClientResponseException(
             404, "Not Found", null, null, null));
-        */
+
 
         // Esperamos que se lance una excepción cuando se llame al método
         assertThrows(ResponseStatusException.class, () -> {
