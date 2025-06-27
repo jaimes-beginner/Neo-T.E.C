@@ -15,5 +15,5 @@ import com.duoc.api_inscripciones.model.entity.Progreso;
 public interface ProgresoRepository extends JpaRepository<Progreso, Integer> {
     
     // Métodos para acceder a datos de la base de datos...
-    Optional<Progreso> findByIdUsuarioIdCuros(int idUsuarioProgreso, int idCursoProgreso);
+    Optional<Progreso> findByIdUsuarioProgresoAndIdCursoProgreso(int idUsuario, int idCurso);
 }

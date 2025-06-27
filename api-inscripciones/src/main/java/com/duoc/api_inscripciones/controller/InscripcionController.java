@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.duoc.api_inscripciones.model.entity.Inscripcion;
+import com.duoc.api_inscripciones.service.InscripcionService;
 
 /*------------------------------------------*/
 
@@ -20,7 +21,7 @@ public class InscripcionController {
     
     // Atributos
     @Autowired
-    private InscripcionController inscripcionServ;
+    private InscripcionService inscripcionServ;
 
     // Obtener todas las inscripciones
     @GetMapping("/all")

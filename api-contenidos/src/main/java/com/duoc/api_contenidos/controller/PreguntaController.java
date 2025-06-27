@@ -29,12 +29,6 @@ public class PreguntaController {
         return preguntaServ.obtenerTodos();
     }
 
-    // Obtener todos las preguntas por el id de la evaluación
-    @GetMapping("/allByEvaluations/{idEvaluacion}")
-    public List<Pregunta> obtenerPorEvaluacion(@PathVariable int idEvaluacion) {
-        return preguntaServ.obtenerPorEvaluacion(idEvaluacion);
-    }
-
     // Eliminar una pregunta
     @DeleteMapping("/remove/{id}")
     public String eliminar(@PathVariable int id) {

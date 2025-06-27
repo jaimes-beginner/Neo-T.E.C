@@ -28,11 +28,6 @@ public class CursoService {
         return cursoRepo.findAll();
     }
 
-    // Obtener todos los cursos activos
-    public List<Curso> obtenerActivos() {
-        return cursoRepo.findAllByEstadoCurso(true);
-    }
-
     // Obtener un curso por su id 
     public Curso obtenerUno(int id) {
         return cursoRepo.findById(id).orElse(null);

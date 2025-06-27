@@ -21,12 +21,12 @@ public class ProgresoService {
 
     // Obtener el progreso de un alumno
     public Progreso obtener(int idUsuario, int idCurso) {
-        return progresoRepo.findByIdUsuarioIdCuros(idUsuario, idCurso).orElse(null);
+        return progresoRepo.findByIdUsuarioProgresoAndIdCursoProgreso(idUsuario, idCurso).orElse(null);
     }
 
     // Actualizar el progreso de un usuario
     public void actualizarProgreso(int idUsuario, int idCurso, double porcentajeProgresoNuevo) {
-        Progreso progreso = progresoRepo.findByIdUsuarioIdCuros(idUsuario, idCurso)
+        Progreso progreso = progresoRepo.findByIdUsuarioProgresoAndIdCursoProgreso(idUsuario, idCurso)
         // Que hacer en caso de que no exista
         .orElseGet(() -> {
                 Progreso nuevoProgreso = new Progreso();

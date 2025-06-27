@@ -15,5 +15,5 @@ import com.duoc.api_cursos.model.entity.Curso;
 public interface CursoRepository extends JpaRepository<Curso, Integer>{
     
     // Métodos para llamar a la base de datos...
-    List<Curso> findAllByEstadoCurso(Boolean estadoCurso);
+    List<Curso> findAllByEstadoCurso(String estadoCurso);
 }

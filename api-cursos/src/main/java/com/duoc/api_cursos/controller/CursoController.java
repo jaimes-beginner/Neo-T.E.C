@@ -34,12 +34,6 @@ public class CursoController {
         return cursoServ.obtenerTodos();
     }
 
-    // Obtener todos los cursos activos
-    @GetMapping("/allActives")
-    public List<Curso> obtenerActivos() {
-        return cursoServ.obtenerActivos();
-    }
-
     // Agregar un curso
     @PostMapping("/add")
     public Curso agregar(@Valid @RequestBody CursoCreate datosCrear) {

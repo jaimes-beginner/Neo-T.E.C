@@ -11,13 +11,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import java.util.Date;
 import java.util.Optional;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
 import com.duoc.api_cursos.model.entity.Curso;
 import com.duoc.api_cursos.model.request.CursoCreate;
 import com.duoc.api_cursos.repository.CursoRepository;
