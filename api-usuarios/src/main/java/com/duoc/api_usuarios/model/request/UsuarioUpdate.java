@@ -18,4 +18,5 @@ public class UsuarioUpdate {
 
     private String passwordUsuario;         // Constraseña del usuario
 
+
 }
