@@ -43,21 +43,6 @@ public class ContenidoService {
     }
 
 
-    
-    // OBTENER POR CURSO: devuelve contenido por el ID del curso
-    public CursoDTO obtenerPorCurso(int idContenido) {
-        Contenido contenido = obtenerUno(idContenido);
-        if(contenido == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        int idCurso = contenido.getIdCursoContenido();
-
-        // Devolverá el resultado de la llamada HTTP hacia el microservicio Cursos
-        return cursosWebClient.get().uri("/courses/" + idCurso)
-                .retrieve().bodyToMono(CursoDTO.class).block();
-    }
-
-
 
     // AGREGAR: agrega un nuevo contenido según los datos (datosCrear)
     public Contenido agregar(ContenidoCreate datosCrear) {
@@ -68,7 +53,7 @@ public class ContenidoService {
                             .retrieve().toBodilessEntity().block();
 
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Curso no encontrado");
         }
 
         try {

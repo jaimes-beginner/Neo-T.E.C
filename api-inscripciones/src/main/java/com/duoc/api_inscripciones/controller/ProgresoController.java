@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 /*------------------------------------------*/
 
 @RestController
-@RequestMapping(value = "/progress", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping("/progress")
 public class ProgresoController {
 
     // Atributos
@@ -37,10 +37,10 @@ public class ProgresoController {
 
     // OBTENER UNO: devuelve a un usuario por su ID
     @GetMapping("/{idUsuario}")
-    public ResponseEntity<EntityModel<Progreso>> obtenerUno(@PathVariable int idProgreso) {
+    public ResponseEntity<EntityModel<Progreso>> obtenerUno(@PathVariable int idUsuario) {
         
         // HATEOAS: Solo se ajustan las peticiones que solo devuelvan datos (GET)
-        Progreso progreso = progresoServ.obtenerUno(idProgreso);
+        Progreso progreso = progresoServ.obtenerUno(idUsuario);
         if (progreso == null) {
             return ResponseEntity.notFound().build();
         }

@@ -64,27 +64,42 @@ public class InscripcionService {
 
 
 
-    // Verificar si el usuario existe, devolviendo true o false
+    // Verificar si el usuario existe
     public Boolean existenciaUsuario(int idUsuario) {
         try {
-            return Boolean.TRUE.equals(usuarioWebClient.get().uri("http://localhost:8080/users/" + idUsuario)
-            .retrieve().bodyToMono(UsuarioDTO.class).block() != null);
+            System.out.println("Verificando existencia del usuario con ID: " + idUsuario);
             
-        }  catch (WebClientResponseException.NotFound e) {
+            UsuarioDTO usuario = usuarioWebClient.get()
+                .uri("/users/{idUsuario}", idUsuario)
+                .retrieve()
+                .bodyToMono(UsuarioDTO.class)
+                .block();
+
+            System.out.println("Resultado de llamada al microservicio de usuarios: " + usuario);
+            return usuario != null;
+
+        } catch (WebClientResponseException.NotFound e) {
+            System.out.println("Usuario no encontrado (404) para ID: " + idUsuario);
             return false;
+        } catch (Exception e) {
+            System.out.println("Error al consultar microservicio de usuarios: " + e.getMessage());
+            throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, "Error consultando al microservicio de usuarios");
         }
     }
 
 
 
-    // Verificar si el curso existe, devolviendo true o false
+    // Verificar si el curso existe
     public Boolean existenciaCurso(int idCurso) {
         try {
-            return Boolean.TRUE.equals(cursoWebClient.get().uri("http://localhost:8081/users/" + idCurso)
-            .retrieve().bodyToMono(CursoDTO.class).block() != null);
-            
-        }  catch (WebClientResponseException.NotFound e) {
+            CursoDTO curso = cursoWebClient.get()
+                .uri("/courses/{idCurso}", idCurso).retrieve().bodyToMono(CursoDTO.class).block();
+
+            return curso != null;
+        } catch (WebClientResponseException.NotFound e) {
             return false;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.SERVICE_UNAVAILABLE, "Error consultando al microservicio de cursos");
         }
     }
 
@@ -95,17 +110,17 @@ public class InscripcionService {
         Inscripcion inscripcion = new Inscripcion();
 
         // Verificar que no haya inscripciones duplicadas
-        if(inscripcionRepo.existsByIdUsuarioInscripcionAndIdCursoInscripcion(datosCrear.getIdUsuarioInscripcion(),datosCrear.getIdCursoInscripcion())) {
+        if(inscripcionRepo.existsByIdUsuarioInscripcionAndIdCursoInscripcion(datosCrear.getIdUsuario(),datosCrear.getIdCurso())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ya estás inscrito");
         }
 
         // Verificando los datos del InscripcionCreate
-        if(!existenciaUsuario(datosCrear.getIdUsuarioInscripcion())) {
+        if(!existenciaUsuario(datosCrear.getIdUsuario())) {
             throw new IllegalArgumentException("Usuario no encontrado");
         }
 
         // Verificando los datos del InscripcionCreate
-        if(!existenciaCurso(datosCrear.getIdCursoInscripcion())) {
+        if(!existenciaCurso(datosCrear.getIdCurso())) {
             throw new IllegalArgumentException("Curso no encontrado");
         }
 
@@ -113,8 +128,8 @@ public class InscripcionService {
         try {
             inscripcion.setFechaInscripcion(new Date());
             inscripcion.setEstadoInscripcion(true);
-            inscripcion.setIdUsuarioInscripcion(datosCrear.getIdUsuarioInscripcion());
-            inscripcion.setIdCursoInscripcion(datosCrear.getIdCursoInscripcion());
+            inscripcion.setIdUsuarioInscripcion(datosCrear.getIdUsuario());
+            inscripcion.setIdCursoInscripcion(datosCrear.getIdCurso());
             return inscripcionRepo.save(inscripcion);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -131,5 +146,6 @@ public class InscripcionService {
         }
         inscripcionRepo.delete(inscripcion);
     }
+
 
 }

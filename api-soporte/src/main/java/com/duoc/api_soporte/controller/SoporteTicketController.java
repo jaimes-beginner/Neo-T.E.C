@@ -73,9 +73,9 @@ public class SoporteTicketController {
 
     // Crear un ticket
     @PostMapping("/add")
-    public String crearTicket(@RequestBody @Valid  SoporteTicketCreate soCreated) {
-        soporteTiServe.crearTicket(soCreated);
-        return "Ticket levantado con exito";
+    public SoporteTicket crearTicket(@RequestBody @Valid SoporteTicketCreate soCreated) {
+        return soporteTiServe.crearTicket(soCreated);
+
     }
 
 }

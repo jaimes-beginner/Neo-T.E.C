@@ -48,6 +48,7 @@ public class SoporteTicketService {
             nuevoTicket.setIdUsuarioTicket(datosCrear.getIdUsuarioTicket());
             nuevoTicket.setTemaTicket(datosCrear.getIncidenteTicket());
             nuevoTicket.setEstadoTicket(datosCrear.getEstadoTicket());
+            nuevoTicket.setRespuestaTicket(datosCrear.getRespuestaTicket());
             return soporteRepo.save(nuevoTicket);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);

@@ -54,8 +54,8 @@ public class IngresarInscripcion {
 
         // Creamos el DTO con los datos necesarios
         InscripcionCreate datosCrear = new InscripcionCreate();
-        datosCrear.setIdUsuarioInscripcion(idUsuario);
-        datosCrear.setIdCursoInscripcion(idCurso);
+        datosCrear.setIdUsuario(idUsuario);
+        datosCrear.setIdCurso(idCurso);
 
         // Simulamos que NO existe una inscripción previa
         when(inscripcionRepo.existsByIdUsuarioInscripcionAndIdCursoInscripcion(idUsuario, idCurso)).thenReturn(false);
@@ -95,8 +95,8 @@ public class IngresarInscripcion {
 
         // Creamos el DTO con los datos necesarios
         InscripcionCreate datosCrear = new InscripcionCreate();
-        datosCrear.setIdUsuarioInscripcion(idUsuario);
-        datosCrear.setIdCursoInscripcion(idCurso);
+        datosCrear.setIdUsuario(idUsuario);
+        datosCrear.setIdCurso(idCurso);
 
         // Simulamos que ya hay una inscripción existente
         when(inscripcionRepo.existsByIdUsuarioInscripcionAndIdCursoInscripcion(idUsuario, idCurso)).thenReturn(true);

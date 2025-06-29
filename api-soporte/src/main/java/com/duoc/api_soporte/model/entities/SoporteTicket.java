@@ -33,7 +33,7 @@ public class SoporteTicket {
     @Column(nullable = false)
     private String estadoTicket;        // Estado del Ticket 
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String respuestaTicket;     // Respuesta del ticket
     
     private Date fechaTicket;           // Fecha en la que se hizo el ticket

@@ -16,6 +16,7 @@ public class SoporteTicketCreate {
     @NotNull
     private int idUsuarioTicket;        // Id del usuario quien hace el ticket
 
+    @NotNull
     private String respuestaTicket;     // Respuesta del ticket
 
 }

@@ -20,8 +20,7 @@ import lombok.Data;
 public class Inscripcion {
     
     @Id
-    @GeneratedValue
-    (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idInscripcion;                  // Identificador del la inscripción
 
     @Column(nullable = false)

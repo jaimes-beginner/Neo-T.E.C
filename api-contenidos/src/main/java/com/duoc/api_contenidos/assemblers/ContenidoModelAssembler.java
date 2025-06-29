@@ -31,10 +31,7 @@ public class ContenidoModelAssembler implements RepresentationModelAssembler<Con
             linkTo(methodOn(ContenidoController.class).obtenerUno(contenido.getIdContenido())).withSelfRel(),
 
             // Link al listado de todos los contenidos
-            linkTo(methodOn(ContenidoController.class).obtenerTodos()).withRel("todos"),
-
-            // Link a los contenidos del curso al que este contenido pertenece
-            linkTo(methodOn(ContenidoController.class).obtenerPorCurso(contenido.getIdCursoContenido())).withRel("curso")
+            linkTo(methodOn(ContenidoController.class).obtenerTodos()).withRel("todos")
 
         );
     }

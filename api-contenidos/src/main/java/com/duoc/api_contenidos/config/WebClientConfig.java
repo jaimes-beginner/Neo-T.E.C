@@ -15,7 +15,7 @@ public class WebClientConfig {
     // Puerto hacia cursos: 8083
     @Bean
     public WebClient cursosWebClient() {
-        return WebClient.builder().baseUrl("http://localhost:8083") .build();
+        return WebClient.builder().baseUrl("http://localhost:8081") .build();
     }
 
 }

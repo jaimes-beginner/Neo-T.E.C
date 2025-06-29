@@ -68,14 +68,6 @@ public class ContenidoController {
 
 
 
-    // Obtener todos los contenidos por el ID del curso
-    @GetMapping("/allByCourse/{idCurso}")
-    public CursoDTO obtenerPorCurso(@PathVariable int idCurso) {
-        return contenidoServ.obtenerPorCurso(idCurso);
-    }
-
-
-
     // Agregar un contenido, ATEOAS: método configurado para las pruebas acá
     @PostMapping("/add")
     public ResponseEntity<EntityModel<Contenido>> agregar(@Valid @RequestBody ContenidoCreate datosCrear) {
