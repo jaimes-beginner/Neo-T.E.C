@@ -24,20 +24,27 @@ public class ContenidoService {
     @Autowired
     private ContenidoRepository contenidoRepo;
 
+    // Atributos
     @Autowired
     private WebClient cursosWebClient;
 
-    // Obtener todos los contenidos
+
+
+    // OBTENER TODOS: devuelve todos los contenidos
     public List<Contenido> obtenerTodos() {
         return contenidoRepo.findAll();
     }
 
-    // Obtener un contenido por su id 
+
+
+    // OBTENER UNO: devuelve un contenido por su ID
     public Contenido obtenerUno(int id) {
         return contenidoRepo.findById(id).orElse(null);
     }
 
-    // Obtener contenidos por el id del curso
+
+    
+    // OBTENER POR CURSO: devuelve contenido por el ID del curso
     public CursoDTO obtenerPorCurso(int idContenido) {
         Contenido contenido = obtenerUno(idContenido);
         if(contenido == null) {
@@ -50,7 +57,9 @@ public class ContenidoService {
                 .retrieve().bodyToMono(CursoDTO.class).block();
     }
 
-    // Agregar un contenido
+
+
+    // AGREGAR: agrega un nuevo contenido según los datos (datosCrear)
     public Contenido agregar(ContenidoCreate datosCrear) {
         Contenido contenido = new Contenido();
         try {
@@ -75,7 +84,9 @@ public class ContenidoService {
         }
     }
 
-    // Eliminar un contenido
+
+
+    // ELIMINAR: elimina un contenido por su ID
     public void eliminar(int id) {
         Contenido contenido = obtenerUno(id);
         if(contenido == null) {
@@ -84,7 +95,9 @@ public class ContenidoService {
         contenidoRepo.deleteById(id);
     }
 
-    // Modificar un contenido
+
+
+    // MODIFICAR: modifica un contenido según los datos (datosModificar)
     public Contenido modificar(ContenidoUpdate datosModificar) {
         Contenido contenido = obtenerUno(datosModificar.getIdContenido());
         if(contenido == null) {

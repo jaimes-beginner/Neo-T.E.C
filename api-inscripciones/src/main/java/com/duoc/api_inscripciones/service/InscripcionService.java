@@ -13,6 +13,7 @@ import org.springframework.web.reactive.function.client.WebClientResponseExcepti
 import org.springframework.web.server.ResponseStatusException;
 import com.duoc.api_inscripciones.model.entity.Inscripcion;
 import com.duoc.api_inscripciones.model.request.CursoDTO;
+import com.duoc.api_inscripciones.model.request.InscripcionCreate;
 import com.duoc.api_inscripciones.model.request.UsuarioDTO;
 import com.duoc.api_inscripciones.repository.InscripcionRepository;
 
@@ -24,26 +25,44 @@ public class InscripcionService {
     // Autowired
     @Autowired
     private InscripcionRepository inscripcionRepo;
+
+    // Autowired
     @Autowired
     private WebClient usuarioWebClient;
+
+    // Autowired
     @Autowired
     private WebClient cursoWebClient;
 
 
+    
     // Obtener todos los inscripción
     public List<Inscripcion> obtenerTodos() {
         return inscripcionRepo.findAll();
     }
 
-    // Obtener todas las inscripciones por el id del usuario
+
+
+    // Obtener todas las inscripciones por el ID del usuario
     public List<Inscripcion> obtenerPorUsuario(int idUsuario) {
         return inscripcionRepo.findAllByIdUsuarioInscripcion(idUsuario);
     }
+
+
+
+    // Obtener todas las inscripciones que tuvo un curso, según su ID
+    public List<Inscripcion> obtenerPorCurso(int idCurso) {
+        return inscripcionRepo.findAllByIdCursoInscripcion(idCurso);
+    }
+
+
 
     // Obtener una inscripcion por su id 
     public Inscripcion obtenerUno(int id) {
         return inscripcionRepo.findById(id).orElse(null);
     }
+
+
 
     // Verificar si el usuario existe, devolviendo true o false
     public Boolean existenciaUsuario(int idUsuario) {
@@ -56,6 +75,8 @@ public class InscripcionService {
         }
     }
 
+
+
     // Verificar si el curso existe, devolviendo true o false
     public Boolean existenciaCurso(int idCurso) {
         try {
@@ -67,20 +88,24 @@ public class InscripcionService {
         }
     }
 
+
+
     // Inscribir a un usuario, verificando si en primer lugar existe el mismo y el curso
-    public Inscripcion agregar(int idUsuario, int idCurso) {
+    public Inscripcion agregar(InscripcionCreate datosCrear) {
         Inscripcion inscripcion = new Inscripcion();
 
         // Verificar que no haya inscripciones duplicadas
-        if(inscripcionRepo.existsByIdUsuarioInscripcionAndIdCursoInscripcion(idUsuario, idCurso)) {
+        if(inscripcionRepo.existsByIdUsuarioInscripcionAndIdCursoInscripcion(datosCrear.getIdUsuarioInscripcion(),datosCrear.getIdCursoInscripcion())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ya estás inscrito");
         }
 
-        // Verificar que los datos colocados en verdad existan para hacer la inscripcion
-        if(!existenciaUsuario(idUsuario)) {
+        // Verificando los datos del InscripcionCreate
+        if(!existenciaUsuario(datosCrear.getIdUsuarioInscripcion())) {
             throw new IllegalArgumentException("Usuario no encontrado");
         }
-        if(!existenciaCurso(idCurso)) {
+
+        // Verificando los datos del InscripcionCreate
+        if(!existenciaCurso(datosCrear.getIdCursoInscripcion())) {
             throw new IllegalArgumentException("Curso no encontrado");
         }
 
@@ -88,13 +113,15 @@ public class InscripcionService {
         try {
             inscripcion.setFechaInscripcion(new Date());
             inscripcion.setEstadoInscripcion(true);
-            inscripcion.setIdUsuarioInscripcion(idUsuario);
-            inscripcion.setIdCursoInscripcion(idCurso);
+            inscripcion.setIdUsuarioInscripcion(datosCrear.getIdUsuarioInscripcion());
+            inscripcion.setIdCursoInscripcion(datosCrear.getIdCursoInscripcion());
             return inscripcionRepo.save(inscripcion);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
+
+
 
     // Eliminar una inscripción
     public void eliminar(int id) {

@@ -1,13 +1,13 @@
 package com.duoc.api_inscripciones.service;
 
-import java.util.Date;
-
 /*------------------------------------------*/
 
 // Importaciones
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.duoc.api_inscripciones.model.entity.Progreso;
+import com.duoc.api_inscripciones.model.request.ProgresoUpdate;
 import com.duoc.api_inscripciones.repository.ProgresoRepository;
 
 /*------------------------------------------*/
@@ -19,24 +19,35 @@ public class ProgresoService {
     @Autowired
     private ProgresoRepository progresoRepo;
 
+
+
+    // Obtener un progreso según su ID
+    public Progreso obtenerUno(int idProgreso) {
+        return progresoRepo.findById(idProgreso).orElse(null);
+    }
+
+
+
     // Obtener el progreso de un alumno
-    public Progreso obtener(int idUsuario, int idCurso) {
+    public Progreso obtenerSegunDatos(int idUsuario, int idCurso) {
         return progresoRepo.findByIdUsuarioProgresoAndIdCursoProgreso(idUsuario, idCurso).orElse(null);
     }
 
+
+
     // Actualizar el progreso de un usuario
-    public void actualizarProgreso(int idUsuario, int idCurso, double porcentajeProgresoNuevo) {
-        Progreso progreso = progresoRepo.findByIdUsuarioProgresoAndIdCursoProgreso(idUsuario, idCurso)
+    public Progreso actualizarProgreso(ProgresoUpdate datosModificar) {
+        Progreso progreso = progresoRepo.findByIdUsuarioProgresoAndIdCursoProgreso(datosModificar.getIdUsuarioProgreso(), datosModificar.getIdCursoProgreso())
         // Que hacer en caso de que no exista
         .orElseGet(() -> {
                 Progreso nuevoProgreso = new Progreso();
-                nuevoProgreso.setIdUsuarioProgreso(idUsuario);
-                nuevoProgreso.setIdCursoProgreso(idCurso);
+                nuevoProgreso.setIdUsuarioProgreso(datosModificar.getIdUsuarioProgreso());
+                nuevoProgreso.setIdCursoProgreso(datosModificar.getIdCursoProgreso());
                 return nuevoProgreso;
         });    
-        progreso.setPorcentajeProgreso(porcentajeProgresoNuevo);
+        progreso.setPorcentajeProgreso(datosModificar.getPorcentajeProgreso());
         progreso.setUltimaActividadProgreso(new Date());
-        progresoRepo.save(progreso);
+        return progresoRepo.save(progreso);
     }
 
 }

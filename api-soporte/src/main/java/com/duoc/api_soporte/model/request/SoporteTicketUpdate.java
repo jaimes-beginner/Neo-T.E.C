@@ -16,4 +16,5 @@ public class SoporteTicketUpdate {
 
     private String estadoTicket;    // El estado del ticket
 
+    private String respuestaTicket;
 }

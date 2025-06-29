@@ -21,7 +21,7 @@ public class Proveedor {
     @Id
     @GeneratedValue
     (strategy = GenerationType.IDENTITY)
-    private int idProveedor;                       // Identificador del proveedor
+    private int idProveedor;                        // Identificador del proveedor
 
     @Column(nullable = false)
     private String nombreProveedor;                 // Nombre del proveedor

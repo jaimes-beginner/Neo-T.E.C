@@ -31,4 +31,11 @@ public class Resenia {
     private int puntuacionResenia;          // Nota de la reseña
 
     private Date fechaResenia;              // Fecha de la reseña
+
+    @Column(nullable = false)
+    private int idUsuarioResenia;           // Id del usuario que hizo la reseña
+
+    @Column(nullable = false)
+    private int idCursoResenia;             // Id del en donde se hizo de la reseña
+
 }

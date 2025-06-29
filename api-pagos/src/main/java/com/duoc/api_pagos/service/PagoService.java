@@ -27,6 +27,12 @@ public class PagoService {
     @Autowired
     private WebClient cursoWebClient;
 
+    
+    // Obtener un pago por su ID
+    public Pago obtenerUno(int idPago) {
+        return pagoRepo.findById(idPago).orElse(null);
+    }
+
     // Obtener todos los pagos
     public List<Pago> obtenerTodos() {
         return pagoRepo.findAll();

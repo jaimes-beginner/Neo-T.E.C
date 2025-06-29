@@ -15,4 +15,5 @@ public interface ContenidoRepository extends JpaRepository<Contenido, Integer> {
     
     // Métodos para acceder a los datos de la base de datos...
     List<Contenido> findAllByIdCursoContenido(int idCursoContenido);
+
 }

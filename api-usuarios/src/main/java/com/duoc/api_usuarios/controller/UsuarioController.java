@@ -22,12 +22,7 @@ import com.duoc.api_usuarios.model.entity.Usuario;
 import com.duoc.api_usuarios.model.request.UsuarioCreate;
 import com.duoc.api_usuarios.model.request.UsuarioUpdate;
 import com.duoc.api_usuarios.service.UsuarioService;
-import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.MediaType;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 
 /*------------------------------------------*/
@@ -39,12 +34,18 @@ public class UsuarioController {
     // Atributos
     @Autowired
     public UsuarioService usuarioServ;
+
+    // Atributos
     @Autowired
     public UsuarioModelAssembler assembler;
 
-    // Obtener a un usuario por su id 
-    @GetMapping(value = "/{idUsuario}", produces = MediaType.APPLICATION_JSON_VALUE)
+
+
+    // OBTENER UNO: devuelve a un usuario por su ID
+    @GetMapping("/{idUsuario}")
     public ResponseEntity<EntityModel<Usuario>> obtenerUno(@PathVariable int idUsuario) {
+
+        // HATEOAS: Solo se ajustan las peticiones que solo devuelvan datos (GET)
         Usuario usuario = usuarioServ.obtenerUno(idUsuario);
         if (usuario == null) {
             return ResponseEntity.notFound().build();
@@ -52,9 +53,13 @@ public class UsuarioController {
         return ResponseEntity.ok(assembler.toModel(usuario));
     }
 
-    // Obtener a todos los usuarios, HATEOAS: Devuelve todos los links disponibles para usar 
+
+
+    // OBTENER TODOS: devuelve a todos los usuarios en general, activos o no.
     @GetMapping("/all")
     public CollectionModel<EntityModel<Usuario>> obtenerTodos() {
+
+        // HATEOAS: Solo se ajustan las peticiones que solo devuelvan datos (GET)
         List<EntityModel<Usuario>> usuarios = usuarioServ.obtenerTodos().stream()
             .map(assembler::toModel)
             .collect(Collectors.toList());
@@ -63,9 +68,13 @@ public class UsuarioController {
             linkTo(methodOn(UsuarioController.class).obtenerTodos()).withSelfRel());
     }
 
-   // Obtener a todos los usuarios activos, HATEOAS: Devuelve todos los links disponibles para usar 
+
+
+   // OBTENER ACTIVOS: devuelve a todos los usuarios activos
     @GetMapping("/allActives")
     public CollectionModel<EntityModel<Usuario>> obtenerActivos() {
+
+        // HATEOAS: Solo se ajustan las peticiones que solo devuelvan datos (GET)
         List<EntityModel<Usuario>> usuarios = usuarioServ.obtenerActivos().stream()
             .map(assembler::toModel)
             .collect(Collectors.toList());
@@ -75,7 +84,8 @@ public class UsuarioController {
     }
 
 
-
+    
+    /* 
     @Operation(summary = "Crear y registrar a un usuario")
     // Permite varias respuestas del endpoint
     @ApiResponses(value = { 
@@ -85,26 +95,19 @@ public class UsuarioController {
         // Que pasa si la respuestas no es existosa
         @ApiResponse(responseCode = "400", description = "Parámetros inválidos")
     })
+     */
 
-    // Registrar un usuario
-    @PostMapping(value = "/auth/register", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<EntityModel<Usuario>> registrar(@Valid @RequestBody UsuarioCreate datosCrear) {
-        Usuario usuario = usuarioServ.agregar(datosCrear);
-        return ResponseEntity.ok(assembler.toModel(usuario));
+
+
+    // REGISTRAR: registra-agrega a un nuevo usuario según los datos (datosCrear)
+    @PostMapping("/auth/register")
+    public Usuario registrar(@Valid @RequestBody UsuarioCreate datosCrear) {
+        return usuarioServ.agregar(datosCrear);
     }
 
 
-    @Operation(summary = "Eliminar a un usuario por su ID")
-    // Permite varias respuestas del endpoint
-    @ApiResponses(value = { 
-        // Que pasa si la respuestas es existosa
-        @ApiResponse(responseCode = "200", description = "El usuario a sido eliminado/deshabilitado exitosamente!",
-            content = @Content(mediaType = "text/plain", examples = @ExampleObject(value = "1"))),
-        // Que pasa si la respuestas no es existosa
-        @ApiResponse(responseCode = "400", description = "Parámetros inválidos")
-    })
 
-    // Eliminar a un usuario
+    // ELIMINAR: elimina a un usuario según su ID
     @PutMapping("/remove/{idUsuario}")
     public ResponseEntity<Void> eliminar(@PathVariable int idUsuario) {
         usuarioServ.eliminar(idUsuario);
@@ -112,21 +115,12 @@ public class UsuarioController {
     }
 
 
-    @Operation(summary = "Modificar a un usuario por su ID")
-    // Permite varias respuestas del endpoint
-    @ApiResponses(value = { 
-        // Que pasa si la respuestas es existosa
-        @ApiResponse(responseCode = "200", description = "El usuario a sido modificado/actualizado exitosamente!",
-            content = @Content(mediaType = "text/plain", examples = @ExampleObject(value = "1"))),
-        // Que pasa si la respuestas no es existosa
-        @ApiResponse(responseCode = "400", description = "Parámetros inválidos")
-    })
 
-    // Modificar un usuario
+    // MODIFICAR: modificar a un usuario según su ID, que se encuentra en los datos (datosModificar)
     @PutMapping("/modify")
-    public String modificar(@Valid @RequestBody UsuarioUpdate datosModificar) {
-        usuarioServ.modificar(datosModificar);
-        return "Usuario modificado!";
+    public Usuario modificar(@Valid @RequestBody UsuarioUpdate datosModificar) {
+        return usuarioServ.modificar(datosModificar);
+       
     }
 
 }

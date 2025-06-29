@@ -22,15 +22,20 @@ public class SoporteTicket {
     @Id
     @GeneratedValue
     (strategy = GenerationType.IDENTITY)
-    private int idTicket;                // Identificador del Ticket 
+    private int idTicket;               // Identificador del Ticket 
+
+    @Column(nullable = false)
+    private int idUsuarioTicket;        // Id del usuario quien hace el ticket
 
     @Column(nullable = false)
     private String temaTicket;          // Tema del Ticket 
 
     @Column(nullable = false)
     private String estadoTicket;        // Estado del Ticket 
+
+    @Column(nullable = true)
+    private String respuestaTicket;     // Respuesta del ticket
     
     private Date fechaTicket;           // Fecha en la que se hizo el ticket
-
 
 }

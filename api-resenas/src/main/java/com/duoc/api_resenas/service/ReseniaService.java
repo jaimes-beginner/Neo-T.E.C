@@ -22,15 +22,21 @@ public class ReseniaService {
     @Autowired
     private ReseniaRepository reseniaRepo;
 
+
+
     // Obtener todas las reseñas
     public List<Resenia> obtenerTodos(){
         return reseniaRepo.findAll();
     }
 
+
+
     // Obtener una reseña por ID 
-    public Resenia obtenerUno(int id) {
-        return reseniaRepo.findById(id).orElse(null);
+    public Resenia obtenerUno(int idResenia) {
+        return reseniaRepo.findById(idResenia).orElse(null);
     }
+
+
 
     // Dejar una reseña
     public Resenia dejarResena(ReseniaCreate resena) {
@@ -43,6 +49,8 @@ public class ReseniaService {
 
         // Setteando los datos de la reseña
         try {
+            resenia.setIdUsuarioResenia(resena.getIdUsuarioResenia());
+            resenia.setIdCursoResenia(resena.getIdCursoResenia());
             resenia.setPuntuacionResenia(resena.getPuntuacionResenia());
             resenia.setTextoResenia(resena.getTextoResenia());
             resenia.setFechaResenia(new Date());
@@ -52,7 +60,5 @@ public class ReseniaService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
-
-    // Considerar calcular el promedio de las reseñas por curso...
 
 }

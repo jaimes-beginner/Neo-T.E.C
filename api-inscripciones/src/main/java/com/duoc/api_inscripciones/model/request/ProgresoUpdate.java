@@ -1,5 +1,7 @@
 package com.duoc.api_inscripciones.model.request;
 
+import java.util.Date;
+
 /*------------------------------------------*/
 
 // Importaciones
@@ -18,8 +20,6 @@ public class ProgresoUpdate {
 
     private int idCursoProgreso;            // Id del curso que se le quiere saber el progreso
 
-    private int porcentajeProgreso;         // Porcentaje del progreso
-
-    private String ultimaActividadProgreso;         // Ultima actividad en este contexto
+    private Double porcentajeProgreso;         // Porcentaje del progreso
 
 }

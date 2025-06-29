@@ -5,6 +5,7 @@ package com.duoc.api_contenidos.controller;
 // Importaciones
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,12 +17,15 @@ import com.duoc.api_contenidos.service.PreguntaService;
 /*------------------------------------------*/
 
 @RestController
-@RequestMapping("/questions")
+@RequestMapping(value = "/questions", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PreguntaController {
     
+
     // Atributos
     @Autowired
     private PreguntaService preguntaServ;
+
+
 
     // Obtener todos las preguntas
     @GetMapping("/all")
@@ -29,6 +33,8 @@ public class PreguntaController {
         return preguntaServ.obtenerTodos();
     }
 
+
+    
     // Eliminar una pregunta
     @DeleteMapping("/remove/{id}")
     public String eliminar(@PathVariable int id) {

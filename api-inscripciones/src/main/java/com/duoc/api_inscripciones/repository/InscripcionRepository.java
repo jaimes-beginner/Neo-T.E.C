@@ -15,5 +15,6 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion, Intege
 
     // Métodos apra acceder a la base de datos
     List<Inscripcion> findAllByIdUsuarioInscripcion(int idUsuarioInscripcion);
+    List<Inscripcion> findAllByIdCursoInscripcion(int idCursoInscripcion);
     Boolean existsByIdUsuarioInscripcionAndIdCursoInscripcion(int idUsuario, int idCurso);
 }

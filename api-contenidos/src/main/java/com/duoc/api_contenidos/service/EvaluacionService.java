@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import com.duoc.api_contenidos.model.entity.Contenido;
 import com.duoc.api_contenidos.model.entity.Evaluacion;
 import com.duoc.api_contenidos.model.entity.Pregunta;
 import com.duoc.api_contenidos.model.request.EvaluacionCreate;
+import com.duoc.api_contenidos.repository.ContenidoRepository;
 import com.duoc.api_contenidos.repository.EvaluacionRepository;
 
 /*------------------------------------------*/
@@ -23,17 +25,34 @@ public class EvaluacionService {
     @Autowired
     private EvaluacionRepository evaluacionRepo;
 
-    // Obtener todas las evaluaciones
+    // Atributos
+    @Autowired
+    private ContenidoRepository contenidoRepo;
+
+
+
+    // OBTENER TODOS: devuelve todas las evaluaciones
     public List<Evaluacion> obtenerTodos() {
         return evaluacionRepo.findAll();
     }
 
-    // Obtener una evaluacion por su id 
+
+
+    // OBTENER UNO: devuelve una evaluacion por su ID
     public Evaluacion obtenerUno(int id) {
         return evaluacionRepo.findById(id).orElse(null);
     }
 
-    // Crear-agregar una evaluacion con sus respectivas pregúntas
+
+
+    // OBTENER POR CONTENIDO: obtiene todas las evaluaciones por el ID del contenido
+    public List<Evaluacion> obtenerPorContenido(int idContenido) {
+        return evaluacionRepo.findByContenido_IdContenido(idContenido);
+    }
+
+
+
+    // AGREGAR: crear-agregar una evaluacion con sus respectivas pregúntas
     public Evaluacion agregar(EvaluacionCreate datosCrear) {
         Evaluacion evaluacion = new Evaluacion();
         try {
@@ -42,7 +61,14 @@ public class EvaluacionService {
             evaluacion.setCreacionEvaluacion(new Date());
             evaluacion.setTipoEvaluacion(datosCrear.getTipoEvaluacion());
 
-            // Setteando los datos de la/s pregúnta/s, que están como un atributo en EvaluacionCreate
+            // Buscar el contenido por ID
+            Contenido contenido = contenidoRepo.findById(datosCrear.getIdContenido())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Contenido no encontrado"));
+
+            // Asociarlo a la evaluación
+            evaluacion.setContenido(contenido);
+
+            // Setteando los datos de la/s pregunta/s, que están como un atributo en EvaluacionCreate
             List<Pregunta> listaPreguntas = datosCrear.getListaPreguntas().stream().map(pdto -> {
                 Pregunta pregunta = new Pregunta();
                 pregunta.setEnunciadoPregunta(pdto.getEnunciadoPregunta());
@@ -59,11 +85,14 @@ public class EvaluacionService {
             return evaluacionRepo.save(evaluacion);
 
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
 
-    // Eliminar una evaluacion
+
+
+    // ELIMINAR: elimina una evaluacion por su ID
     public void eliminar(int id) {
         Evaluacion evaluacion = obtenerUno(id);
         if(evaluacion == null) {

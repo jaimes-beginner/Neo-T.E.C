@@ -23,17 +23,22 @@ public class CursoService {
     @Autowired
     private CursoRepository cursoRepo;
 
+
+
     // Obtener todos los cursos
     public List<Curso> obtenerTodos() {
         return cursoRepo.findAll();
     }
+
+
 
     // Obtener un curso por su id 
     public Curso obtenerUno(int id) {
         return cursoRepo.findById(id).orElse(null);
     }
 
-    // Considerar asociar a un profesor en la clase...
+
+
     // Agregar un curso
     public Curso agregar(CursoCreate datosCrear) {
         Curso curso = new Curso();
@@ -50,6 +55,8 @@ public class CursoService {
         }
     }
 
+
+
     // Publicar un curso
     public Curso publicarUnCurso(int id) {
         Curso cursoPublicar = obtenerUno(id);
@@ -60,6 +67,8 @@ public class CursoService {
         return cursoRepo.save(cursoPublicar);
     }   
 
+
+
     // Eliminar un curso por su id
     public void eliminar(int id) {
         Curso curso = obtenerUno(id);
@@ -68,6 +77,8 @@ public class CursoService {
         }
         cursoRepo.delete(curso);
     }
+
+
 
     // Modificar un curso por su id (datosModificar)
     public Curso modificar(CursoUpdate datosModificar) {

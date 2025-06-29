@@ -4,41 +4,105 @@ package com.duoc.api_inscripciones.controller;
 
 // Importaciones
 import java.util.List;
+import java.util.stream.Collectors;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.duoc.api_inscripciones.assemblers.InscripcionModelAssembler;
 import com.duoc.api_inscripciones.model.entity.Inscripcion;
+import com.duoc.api_inscripciones.model.request.InscripcionCreate;
 import com.duoc.api_inscripciones.service.InscripcionService;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
 
 /*------------------------------------------*/
 
 @RestController
-@RequestMapping("/inscriptions")
+@RequestMapping(value = "/inscriptions", produces = MediaType.APPLICATION_JSON_VALUE)
 public class InscripcionController {
     
     // Atributos
     @Autowired
     private InscripcionService inscripcionServ;
 
-    // Obtener todas las inscripciones
-    @GetMapping("/all")
-    public List<Inscripcion> obtenerTodos() {
-        return inscripcionServ.obtenerTodos();
-    }
+    // Atributos
+    @Autowired
+    private InscripcionModelAssembler assembler;
 
-    // Obtener inscripciones de un usuario por su id 
+
+
+    // OBTENER UNO: devuelve una inscripcion según su ID
     @GetMapping("/{idUsuario}")
-    public List<Inscripcion> obtenerPorUsuario(@PathVariable int idUsuario) {
-        return inscripcionServ.obtenerPorUsuario(idUsuario);
+    public ResponseEntity<EntityModel<Inscripcion>> obtenerUno(@PathVariable int idInscripcion) {
+        
+        // HATEOAS: Solo se ajustan las peticiones que solo devuelvan datos (GET)
+        Inscripcion inscripcion = inscripcionServ.obtenerUno(idInscripcion);
+        if (inscripcion == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(assembler.toModel(inscripcion));
     }
 
-    // Inscribir un usuario a un curso
-    @PostMapping("/add/{idUsuario}/{idCurso}")
-    public Inscripcion agregar(@PathVariable int idUsuario, int idCurso) {
-        return inscripcionServ.agregar(idUsuario, idCurso);
+
+
+    // OBTENER POR USUARIO: devuelve todas las inscripciones de un usuario
+    @GetMapping("/allForUser/{idUsuario}")
+    public CollectionModel<EntityModel<Inscripcion>> obtenerPorUsuario(@PathVariable int idUsuario) {
+        
+        // HATEOAS: Solo se ajustan las peticiones que solo devuelvan datos (GET)
+        List<EntityModel<Inscripcion>> inscripciones = inscripcionServ.obtenerPorUsuario(idUsuario).stream()
+            .map(assembler::toModel)
+            .collect(Collectors.toList());
+
+        return CollectionModel.of(inscripciones,
+            linkTo(methodOn(InscripcionController.class).obtenerPorUsuario(idUsuario)).withSelfRel());
+    }
+
+
+
+    // OBTENER POR CURSO: devuelve todas las inscripciones de un curso
+    @GetMapping("/allForCourse/{idCurso}")
+    public CollectionModel<EntityModel<Inscripcion>> obtenerPorCurso(@PathVariable int idCurso) {
+        
+        // HATEOAS: Solo se ajustan las peticiones que solo devuelvan datos (GET)
+        List<EntityModel<Inscripcion>> inscripciones = inscripcionServ.obtenerPorCurso(idCurso).stream()
+            .map(assembler::toModel)
+            .collect(Collectors.toList());
+
+        return CollectionModel.of(inscripciones,
+            linkTo(methodOn(InscripcionController.class).obtenerPorCurso(idCurso)).withSelfRel());
+    }
+
+
+
+    // OBTENER TODOS: devuelve todos las inscripciones en general
+    @GetMapping("/all")
+    public CollectionModel<EntityModel<Inscripcion>> obtenerTodos() {
+        
+        // HATEOAS: Solo se ajustan las peticiones que solo devuelvan datos (GET)
+        List<EntityModel<Inscripcion>> inscripciones = inscripcionServ.obtenerTodos().stream()
+            .map(assembler::toModel)
+            .collect(Collectors.toList());
+
+        return CollectionModel.of(inscripciones,
+            linkTo(methodOn(InscripcionController.class).obtenerTodos()).withSelfRel());
+    }
+
+
+
+    // AGREGAR: crea-agrega una inscripcion según los datos (datosCreate)
+    @PostMapping("/add")
+    public ResponseEntity<EntityModel<Inscripcion>> agregar(@Valid @RequestBody InscripcionCreate datosCreate) {
+        Inscripcion inscripcion = inscripcionServ.agregar(datosCreate);
+        return ResponseEntity.ok(assembler.toModel(inscripcion));
     }
 
 }

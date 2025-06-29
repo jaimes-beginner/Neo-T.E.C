@@ -84,7 +84,7 @@ public class UsuarioService {
     }
 
     // Modificar la información de un usuario por su id (datosModificar)
-    public void modificar(UsuarioUpdate datosModificar) {
+    public Usuario modificar(UsuarioUpdate datosModificar) {
         Usuario usuarioModificar = obtenerUno(datosModificar.getIdUsuario());
         if(usuarioModificar == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -98,7 +98,7 @@ public class UsuarioService {
         if(datosModificar.getPasswordUsuario() != null) {
             usuarioModificar.setPasswordUsuario(datosModificar.getPasswordUsuario());
         }
-        usuarioRepo.save(usuarioModificar);
+        return usuarioRepo.save(usuarioModificar);
     }
 
 }

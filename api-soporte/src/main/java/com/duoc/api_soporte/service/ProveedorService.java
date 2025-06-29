@@ -17,19 +17,26 @@ import com.duoc.api_soporte.repository.ProveedorRepository;
 @Service
 public class ProveedorService {
     
+
     // Atributos
     @Autowired
     private ProveedorRepository proveedorRepo;
+
+
 
     // Obtener todos los proveedores
     public List<Proveedor> obtenerTodos() {
         return proveedorRepo.findAll();
     }
 
+
+
     // Obtener uno por su id
     public Proveedor obtenerUno(int idProveedor) {
         return proveedorRepo.findById(idProveedor).orElse(null);
     }
+
+
 
     // Agregar un proveedor
     public Proveedor agregar(ProveedorCreate datosCrear) {
@@ -48,6 +55,8 @@ public class ProveedorService {
         }
     }
 
+
+    
     // Eliminar un proveedor por su id
     public void eliminar(int idProveedor) {
         Proveedor proveedorEliminar = obtenerUno(idProveedor);

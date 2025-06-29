@@ -17,4 +17,11 @@ public class ReseniaCreate {
 
     @NotNull
     private int puntuacionResenia;          // Nota de la Reseña
+
+        @NotNull
+    private int idUsuarioResenia;           // Id del usuario que hizo la reseña
+
+        @NotNull
+    private int idCursoResenia;             // Id del en donde se hizo de la reseña
+
 }

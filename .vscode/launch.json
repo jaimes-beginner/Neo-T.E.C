@@ -9,6 +9,69 @@
             "projectName": "api-usuarios",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiContenidosApplication<api-contenidos>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.duoc.api_contenidos.ApiContenidosApplication",
+            "projectName": "api-contenidos",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=51064 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=api-contenidos"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiCursosApplication<api-cursos>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.duoc.api_cursos.ApiCursosApplication",
+            "projectName": "api-cursos",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=52964 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=api-cursos"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiInscripcionesApplication<api-inscripciones>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.duoc.api_inscripciones.ApiInscripcionesApplication",
+            "projectName": "api-inscripciones",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=54109 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=api-inscripciones"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiPagosApplication<api-pagos>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.duoc.api_pagos.ApiPagosApplication",
+            "projectName": "api-pagos",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiResenasApplication<api-resenas>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.duoc.api_resenas.ApiResenasApplication",
+            "projectName": "api-resenas",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ApiSoporteApplication<api-soporte>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.duoc.api_soporte.ApiSoporteApplication",
+            "projectName": "api-soporte",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
