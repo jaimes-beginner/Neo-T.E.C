@@ -21,6 +21,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.springframework.web.server.ResponseStatusException;
 import com.duoc.api_inscripciones.model.entity.Inscripcion;
+import com.duoc.api_inscripciones.model.request.InscripcionCreate;
 import com.duoc.api_inscripciones.repository.InscripcionRepository;
 import com.duoc.api_inscripciones.service.InscripcionService;
 
@@ -28,7 +29,7 @@ import com.duoc.api_inscripciones.service.InscripcionService;
 
 public class IngresarInscripcion {
 
-    /* 
+
     // Simulamos el repositorio de inscripciones
     @Mock
     private InscripcionRepository inscripcionRepo;
@@ -47,18 +48,23 @@ public class IngresarInscripcion {
     // Test para asegurarse de que todos los datos-conexiones estén bien implementadas
     @Test
     void testRegistrarInscripcion() {
-        // Arrange: preparamos datos de entrada válidos
+        // Arrange
         int idUsuario = 1;
         int idCurso = 10;
 
-        // Simulamos que NO existe una inscripción previa entre ese usuario y curso
+        // Creamos el DTO con los datos necesarios
+        InscripcionCreate datosCrear = new InscripcionCreate();
+        datosCrear.setIdUsuarioInscripcion(idUsuario);
+        datosCrear.setIdCursoInscripcion(idCurso);
+
+        // Simulamos que NO existe una inscripción previa
         when(inscripcionRepo.existsByIdUsuarioInscripcionAndIdCursoInscripcion(idUsuario, idCurso)).thenReturn(false);
 
         // Simulamos que el usuario y curso existen
         doReturn(true).when(inscripcionServ).existenciaUsuario(idUsuario);
-        doReturn(true).when(inscripcionServ).existenciaCurso(idCurso);   
+        doReturn(true).when(inscripcionServ).existenciaCurso(idCurso);
 
-        // También necesitamos simular el guardado del objeto Inscripcion
+        // Simulamos el guardado del objeto Inscripcion
         Inscripcion inscripcionGuardada = new Inscripcion();
         inscripcionGuardada.setIdUsuarioInscripcion(idUsuario);
         inscripcionGuardada.setIdCursoInscripcion(idCurso);
@@ -67,16 +73,15 @@ public class IngresarInscripcion {
 
         when(inscripcionRepo.save(any(Inscripcion.class))).thenReturn(inscripcionGuardada);
 
-        // Ejecutamos el método que queremos probar
-        Inscripcion resultado = inscripcionServ.agregar(idUsuario, idCurso);
+        // Act
+        Inscripcion resultado = inscripcionServ.agregar(datosCrear);
 
-        // Verificamos que todo haya salido correctamente
+        // Assert
         assertNotNull(resultado);
         assertEquals(idUsuario, resultado.getIdUsuarioInscripcion());
         assertEquals(idCurso, resultado.getIdCursoInscripcion());
         assertTrue(resultado.getEstadoInscripcion());
 
-        // Verificamos que se haya llamado al repositorio para guardar
         verify(inscripcionRepo).save(any(Inscripcion.class));
     }
 
@@ -88,12 +93,17 @@ public class IngresarInscripcion {
         int idUsuario = 1;
         int idCurso = 10;
 
+        // Creamos el DTO con los datos necesarios
+        InscripcionCreate datosCrear = new InscripcionCreate();
+        datosCrear.setIdUsuarioInscripcion(idUsuario);
+        datosCrear.setIdCursoInscripcion(idCurso);
+
         // Simulamos que ya hay una inscripción existente
         when(inscripcionRepo.existsByIdUsuarioInscripcionAndIdCursoInscripcion(idUsuario, idCurso)).thenReturn(true);
 
         // Verificamos los no-datos
         ResponseStatusException ex = assertThrows(ResponseStatusException.class, () -> {
-            inscripcionServ.agregar(idUsuario, idCurso);
+            inscripcionServ.agregar(datosCrear);
         });
 
         assertEquals("400 BAD_REQUEST \"Ya estás inscrito\"", ex.getMessage());
@@ -102,6 +112,6 @@ public class IngresarInscripcion {
         verify(inscripcionRepo, never()).save(any());
     }
 
-    */
+    
 }
 

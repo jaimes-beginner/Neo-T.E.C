@@ -14,7 +14,7 @@ import com.duoc.api_pagos.model.entity.Pago;
 
 /*------------------------------------------*/
 
-/* Haciendo el objeto PROGRESO con enlaces HATEOAS, para que devuelva los 
+/* Haciendo el objeto PAGO con enlaces HATEOAS, para que devuelva los 
 datos corresponsientes además de enlaces a recursos que estén relacionados */
 
 @Component
