@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.springframework.web.server.ResponseStatusException;
 import com.duoc.api_inscripciones.model.entity.Inscripcion;
 import com.duoc.api_inscripciones.model.request.InscripcionCreate;
@@ -35,7 +34,6 @@ public class IngresarInscripcion {
     private InscripcionRepository inscripcionRepo;
 
     // Inyectamos el mock en el servicio que vamos a probar
-    @Spy
     @InjectMocks
     private InscripcionService inscripcionServ;
 
@@ -48,6 +46,7 @@ public class IngresarInscripcion {
     // Test para asegurarse de que todos los datos-conexiones estén bien implementadas
     @Test
     void testRegistrarInscripcion() {
+        
         // Arrange
         int idUsuario = 1;
         int idCurso = 10;

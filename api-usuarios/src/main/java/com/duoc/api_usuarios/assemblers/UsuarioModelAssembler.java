@@ -31,6 +31,9 @@ public class UsuarioModelAssembler implements RepresentationModelAssembler<Usuar
             // Self link 
             linkTo(methodOn(UsuarioController.class).obtenerUno(usuario.getIdUsuario())).withSelfRel(),
 
+            // Link para mostrar a todos los usuarios 
+            Link.of("http://localhost:8080/users/all").withRel("mostrar todos"),
+
             // Link para que el usuario se inscriba
             Link.of("http://localhost:8083/inscriptions/add").withRel("inscripciones"),
 

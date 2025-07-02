@@ -23,7 +23,7 @@ import com.duoc.api_usuarios.service.UsuarioService;
 
 public class CrearUsuarioTest {
 
- @Mock
+    @Mock
     private UsuarioRepository usuarioRepo;
 
     @InjectMocks
@@ -34,7 +34,6 @@ public class CrearUsuarioTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
-
 
     // Este test verifica que se cree correctamente un usuario si el correo no existe
     @Test
