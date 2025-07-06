@@ -16,26 +16,31 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "resenia")            // Nombre de la tabla
+@Table(name = "resenia")     
 public class Resenia {
     
+    // ID RESENIA: Id de la reseña
     @Id
-    @GeneratedValue
-    (strategy = GenerationType.IDENTITY)
-    private int idResenia;                  // Id de la reseña
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idResenia;              
 
+    // TEXTO RESENIA: Cuerpo de la reseña
     @Column(nullable = false)
-    private String textoResenia;            // Cuerpo de la reseña
+    private String textoResenia;           
 
+    // PUNTUACION RESENIA: Nota de la reseña
     @Column(nullable = false)
-    private int puntuacionResenia;          // Nota de la reseña
+    private int puntuacionResenia;       
 
-    private Date fechaResenia;              // Fecha de la reseña
+    // FECHA RESENIA: Fecha de la reseña
+    private Date fechaResenia;            
 
+    // ID USUARIO RESENIA: Id del usuario que hizo la reseña
     @Column(nullable = false)
-    private int idUsuarioResenia;           // Id del usuario que hizo la reseña
+    private int idUsuarioResenia;          
 
+    // ID CURSO RESENIA: Id del en donde se hizo de la reseña
     @Column(nullable = false)
-    private int idCursoResenia;             // Id del en donde se hizo de la reseña
+    private int idCursoResenia;             
 
 }

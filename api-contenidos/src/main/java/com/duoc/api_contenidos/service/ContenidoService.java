@@ -28,21 +28,15 @@ public class ContenidoService {
     @Autowired
     private WebClient cursosWebClient;
 
-
-
     // OBTENER TODOS: devuelve todos los contenidos
     public List<Contenido> obtenerTodos() {
         return contenidoRepo.findAll();
     }
 
-
-
     // OBTENER UNO: devuelve un contenido por su ID
     public Contenido obtenerUno(int id) {
         return contenidoRepo.findById(id).orElse(null);
     }
-
-
 
     // AGREGAR: agrega un nuevo contenido según los datos (datosCrear)
     public Contenido agregar(ContenidoCreate datosCrear) {
@@ -69,8 +63,6 @@ public class ContenidoService {
         }
     }
 
-
-
     // ELIMINAR: elimina un contenido por su ID
     public void eliminar(int id) {
         Contenido contenido = obtenerUno(id);
@@ -79,8 +71,6 @@ public class ContenidoService {
         }
         contenidoRepo.deleteById(id);
     }
-
-
 
     // MODIFICAR: modifica un contenido según los datos (datosModificar)
     public Contenido modificar(ContenidoUpdate datosModificar) {

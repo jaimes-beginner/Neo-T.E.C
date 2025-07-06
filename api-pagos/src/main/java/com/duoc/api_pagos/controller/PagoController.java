@@ -37,9 +37,7 @@ public class PagoController {
     @Autowired
     private PagoModelAssembler assembler;
 
-
-
-    // Obtener un pago por su ID, con modificaciónes para el HATEOAS
+    // OBTENER UNO: Obtener un pago por su ID, con modificaciónes para el HATEOAS
     @GetMapping("/{idPago}")
     public ResponseEntity<EntityModel<Pago>> obtenerUno(@PathVariable int idPago) {
         Pago pago = pagoServ.obtenerUno(idPago);
@@ -49,9 +47,7 @@ public class PagoController {
         return ResponseEntity.ok(assembler.toModel(pago));
     }
 
-
-
-    // Obtener todos los pagos, con modificaciónes para el HATEOAS
+    // OBTENER TODOS: Obtener todos los pagos, con modificaciónes para el HATEOAS
     @GetMapping("/all")
     public CollectionModel<EntityModel<Pago>> obtenerTodos() {
         List<EntityModel<Pago>> evaluaciones = pagoServ.obtenerTodos().stream()
@@ -64,9 +60,7 @@ public class PagoController {
         );
     }
 
-
-    
-    // Agregar-registrar un pago con PagoCreate, con modificaciónes para el HATEOAS
+    // AGREGAR PAGO: Agregar-registrar un pago con PagoCreate, con modificaciónes para el HATEOAS
     @PostMapping("/add")
     public ResponseEntity<EntityModel<Pago>> agregarPago(@Valid @RequestBody PagoCreate datosCrear) {
         Pago pago = pagoServ.registrarPago(datosCrear);

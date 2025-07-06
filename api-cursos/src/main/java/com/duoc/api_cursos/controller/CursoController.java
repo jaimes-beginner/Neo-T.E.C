@@ -38,9 +38,7 @@ public class CursoController {
     @Autowired 
     private CursoModelAssembler assembler;
 
-
-
-    // Obtener curso con las modificaciones para el Assembler
+    // OBTENER UNO: Obtener curso con las modificaciones para el Assembler
     @GetMapping("/{idCurso}")
     public ResponseEntity<EntityModel<Curso>> obtenerUno(@PathVariable int idCurso) {
         Curso curso = cursoServ.obtenerUno(idCurso);
@@ -49,10 +47,8 @@ public class CursoController {
         }
         return ResponseEntity.ok(assembler.toModel(curso));
     }
-  
 
-
-    // Obtener todos los cursos con las modificaciones para el Assembler
+    // OBTENER TODOS: Obtener todos los cursos con las modificaciones para el Assembler
     @GetMapping("/all")
     public CollectionModel<EntityModel<Curso>> obtenerTodos() {
         List<EntityModel<Curso>> cursos = cursoServ.obtenerTodos().stream()
@@ -63,27 +59,21 @@ public class CursoController {
             linkTo(methodOn(CursoController.class).obtenerTodos()).withSelfRel());
     }
 
-
-
-    // Agregar un curso
+    // AGREGAR: Agregar un curso
     @PostMapping("/add")
     public ResponseEntity<EntityModel<Curso>> agregar(@Valid @RequestBody CursoCreate datosCrear) {
         Curso curso = cursoServ.agregar(datosCrear);
         return ResponseEntity.ok(assembler.toModel(curso));
     }
 
-
-
-    // Eliminar un curso dependiendo de su ID
+    // ELIMINAR: Eliminar un curso dependiendo de su ID
     @PutMapping("/remove/{id}")
     public String eliminar(@PathVariable int id) {
         cursoServ.eliminar(id);
         return "Curso eliminado!";
     }
 
-
-
-    // Modificar un curso dependiendo de su ID
+    // MODIFICAR: Modificar un curso dependiendo de su ID
     @PutMapping("/modify/{id}")
     public String modificar(@Valid @RequestBody CursoUpdate datosModificar) {
         cursoServ.modificar(datosModificar);

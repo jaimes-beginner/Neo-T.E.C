@@ -20,21 +20,25 @@ import lombok.Data;
 @Table(name = "progress")
 public class Progreso {
     
+    // ID PROGRESO: Identificador del progreso
     @Id
-    @GeneratedValue
-    (strategy = GenerationType.IDENTITY)
-    private int idProgreso;                     // Identificador del progreso
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idProgreso;                   
 
+    // ID USUARIO PROGRESO: Id del usuario al que se le quiere saber el progreso
     @Column(nullable = false)
-    private int idUsuarioProgreso;              // Id del usuario al que se le quiere saber el progreso
+    private int idUsuarioProgreso;   
 
+    // ID CURSO PROGRESO: Id del curso al que se le quiere saber el progreso
     @Column(nullable = false)
-    private int idCursoProgreso;                // Id del curso al que se le quiere saber el progreso
+    private int idCursoProgreso;                
 
+    // PROCENTAJE PROGRESO: Porcentaje que se tiene del progreso
     @Column(nullable = false)
-    private Double porcentajeProgreso;             // Porcentaje que se tiene del progreso
+    private Double porcentajeProgreso;            
 
+    // ULTIMA ACTIVIDAD PROGRESO: Registro de la última actividad
     @Column(nullable = true)
-    private Date ultimaActividadProgreso;     // Registro de la última actividad
+    private Date ultimaActividadProgreso;  
 
 }

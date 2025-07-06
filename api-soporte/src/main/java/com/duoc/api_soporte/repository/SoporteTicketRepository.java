@@ -13,7 +13,5 @@ public interface SoporteTicketRepository extends JpaRepository<SoporteTicket,Int
 
     // Métodos para acceder a los datos de la base de datos...
     SoporteTicket findByIdTicket(int idTicket);
-    
-
 
 }

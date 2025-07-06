@@ -16,21 +16,26 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "inscriptions")           // Nombre de la tabla
+@Table(name = "inscriptions")      
 public class Inscripcion {
     
+    // ID INSCRIPCION: Identificador del la inscripción
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idInscripcion;                  // Identificador del la inscripción
+    private int idInscripcion;                  
 
+    // ID USUARIO INSCRIPCION: Identificador del usuario que se quiere inscribir
     @Column(nullable = false)
-    private int idUsuarioInscripcion;           // Identificador del usuario que se quiere inscribir
+    private int idUsuarioInscripcion;           
 
+    // ID CURSO INSCRIPCION: Identificador del curso al que se va a inscribir
     @Column(nullable = false)
-    private int idCursoInscripcion;             // Identificador del curso al que se va a inscribir
+    private int idCursoInscripcion;         
 
-    private Date fechaInscripcion;              // Fecha de la inscripción
+    // FECHA INSCRIPCION: Fecha de la inscripción
+    private Date fechaInscripcion;           
 
-    private Boolean estadoInscripcion;          // El estado de la inscripción
+    // ESTADO INSCRIPCION: El estado de la inscripción
+    private Boolean estadoInscripcion;        
 
 }

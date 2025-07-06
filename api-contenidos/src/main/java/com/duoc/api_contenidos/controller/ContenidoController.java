@@ -23,7 +23,6 @@ import com.duoc.api_contenidos.assemblers.ContenidoModelAssembler;
 import com.duoc.api_contenidos.model.entity.Contenido;
 import com.duoc.api_contenidos.model.request.ContenidoCreate;
 import com.duoc.api_contenidos.model.request.ContenidoUpdate;
-import com.duoc.api_contenidos.model.request.CursoDTO;
 import com.duoc.api_contenidos.service.ContenidoService;
 import jakarta.validation.Valid;
 
@@ -33,7 +32,6 @@ import jakarta.validation.Valid;
 @RequestMapping(value = "/contents", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ContenidoController {
     
-
     // Atributos
     @Autowired
     private ContenidoService contenidoServ;
@@ -42,18 +40,14 @@ public class ContenidoController {
     @Autowired
     private ContenidoModelAssembler assembler;
 
-
-
-    // Obtener un contenido por su
+    // OBTENER UNO: Obtener un contenido por su
     @GetMapping("/{idContenido}")
     public ResponseEntity<EntityModel<Contenido>> obtenerUno(@PathVariable int idContenido) {
         Contenido contenido = contenidoServ.obtenerUno(idContenido);
         return ResponseEntity.ok(assembler.toModel(contenido));
     }
 
-
-
-    // Obtener todos los contenidos
+    // OBTENER TODOS: Obtener todos los contenidos
     @GetMapping("/all")
     public CollectionModel<EntityModel<Contenido>> obtenerTodos() {
 
@@ -66,27 +60,21 @@ public class ContenidoController {
             linkTo(methodOn(ContenidoController.class).obtenerTodos()).withSelfRel());
     }
 
-
-
-    // Agregar un contenido, ATEOAS: método configurado para las pruebas acá
+    // AGREGAR: Agregar un contenido, ATEOAS: método configurado para las pruebas acá
     @PostMapping("/add")
     public ResponseEntity<EntityModel<Contenido>> agregar(@Valid @RequestBody ContenidoCreate datosCrear) {
         Contenido contenido = contenidoServ.agregar(datosCrear);
         return ResponseEntity.ok(assembler.toModel(contenido));
     }
 
-
-
-    // Eliminar un contenido
+    // ELIMINAR: Eliminar un contenido
     @DeleteMapping("/remove/{id}")
     public String eliminar(@PathVariable int id) {
         contenidoServ.eliminar(id);
         return "Contenido eliminado!";
     }
 
-
-
-    // Modificar un contenido
+    // MODIFICAR: Modificar un contenido
     @PutMapping("/{id}")
     public String modificar(@Valid @RequestBody ContenidoUpdate datosModificar) {
         contenidoServ.modificar(datosModificar);

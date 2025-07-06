@@ -13,19 +13,24 @@ import lombok.Data;
 @Data
 public class ProveedorCreate {
 
+    // NOMBRE PROVEEDOR: Nombre del proveedor
     @NotBlank
-    private String nombreProveedor;                 // Nombre del proveedor
+    private String nombreProveedor;                
 
+    // RUT PROVEEDOR: Rut del proveedor
     @NotBlank
-    private String rutProveedor;                    // Rut del proveedor
+    private String rutProveedor;                  
 
+    // CORREO PROVEEDOR: Correo el proveedor
     @Email
     @NotBlank
-    private String correoProveedor;                 // Correo el proveedor
+    private String correoProveedor;   
 
-    private String fonoProveedor;                   // Telefono del proveedor
+    // FONO PROVEEDOR: Telefono del proveedor
+    private String fonoProveedor;                
 
+    // DESCRIPCION SERVICIO PROVEEDOR: Descripcion del servicio que ofrece
     @NotBlank
-    private String descripcionServicioProveedor;    // Descripcion del servicio que ofrece
+    private String descripcionServicioProveedor;    
 
 }

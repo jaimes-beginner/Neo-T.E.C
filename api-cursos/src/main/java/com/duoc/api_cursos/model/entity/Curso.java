@@ -16,28 +16,34 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "cursos")             // Nombre de la tabla
+@Table(name = "cursos")          
 public class Curso {    
 
+    // ID CURSO: Identificador del curso
     @Id
-    @GeneratedValue
-    (strategy = GenerationType.IDENTITY)
-    private int idCurso;                    // Identificador del curso
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idCurso;                   
 
+    // TITULO CURSO: Titulo del curso
     @Column(nullable = false)
-    private String tituloCurso;             // Titulo del curso
+    private String tituloCurso;             
 
+    // DESCRIPCION CURSO: Descripción del curso
     @Column(nullable = false)
-    private String descripcionCurso;        // Descripción del curso
+    private String descripcionCurso;     
 
+    // CATEGORIA CURSO: Categoria del curso
     @Column(nullable = false)
-    private String categoriaCurso;          // Categoria del curso
+    private String categoriaCurso;        
 
-    private String estadoCurso;            // Estado del curso
+    // ESTADO CURSO: Estado del curso
+    private String estadoCurso;         
 
-    private Date creacionCurso;             // Fecha de creación del curso
+    // CREACION CURSO: Fecha de creación del curso
+    private Date creacionCurso;            
 
+    // ID INSTRUCTOR CURSO: Instructor del curso
     @Column(nullable = false)
-    private int idIntructorCurso;           // Instructor del curso
+    private int idIntructorCurso;           
     
 }

@@ -5,7 +5,6 @@ package com.duoc.api_inscripciones.controller;
 // Importaciones
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,8 +32,6 @@ public class ProgresoController {
     @Autowired
     private ProgresoModelAssembler assembler;
 
-
-
     // OBTENER UNO: devuelve a un usuario por su ID
     @GetMapping("/{idUsuario}")
     public ResponseEntity<EntityModel<Progreso>> obtenerUno(@PathVariable int idUsuario) {
@@ -46,8 +43,6 @@ public class ProgresoController {
         }
         return ResponseEntity.ok(assembler.toModel(progreso));
     }
-
-
 
     // OBTENER SEGUN DATOS: devuelve el progreso de un usuario y su respectivo curso
     @GetMapping("/progress/user/{idUsuario}/course/{idCurso}")
@@ -61,8 +56,6 @@ public class ProgresoController {
         return ResponseEntity.ok(assembler.toModel(progreso));
     }
 
-
-    
     // ACTUALIZAR PROGRESO: modifica-actualiza el progreso de un usuario
     @PutMapping("/updateProgress")
     public ResponseEntity<EntityModel<Progreso>> actualizarProgreso(@Valid @RequestBody ProgresoUpdate datosModificar) {

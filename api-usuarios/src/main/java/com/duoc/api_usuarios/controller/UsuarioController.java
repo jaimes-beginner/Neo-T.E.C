@@ -43,9 +43,6 @@ public class UsuarioController {
     @Autowired
     public UsuarioModelAssembler assembler;
 
-
-
-
     // SWAGGER: documentar cada endpoint
     @Operation(
         summary = "Obtener a un usuario",
@@ -67,9 +64,6 @@ public class UsuarioController {
         }
         return ResponseEntity.ok(assembler.toModel(usuario));
     }
-
-
-
 
     // SWAGGER: documentar cada endpoint
     @Operation(
@@ -94,9 +88,6 @@ public class UsuarioController {
             linkTo(methodOn(UsuarioController.class).obtenerTodos()).withSelfRel());
     }
 
-
-
-
     // SWAGGER: documentar cada endpoint
     @Operation(
         summary = "Obtener a todos los usuarios activos",
@@ -120,9 +111,6 @@ public class UsuarioController {
             linkTo(methodOn(UsuarioController.class).obtenerActivos()).withSelfRel());
     }
 
-
-    
-
     // SWAGGER: documentar cada endpoint
     @Operation(
         summary = "Registrar nuevo usuario",
@@ -140,9 +128,6 @@ public class UsuarioController {
         return usuarioServ.agregar(datosCrear);
     }
 
-
-
-
     // SWAGGER: documentar cada endpoint
     @Operation(
         summary = "Eliminar a un usuario",
@@ -159,9 +144,6 @@ public class UsuarioController {
         usuarioServ.eliminar(idUsuario);
         return ResponseEntity.noContent().build();
     }
-
-
-
 
     // SWAGGER: documentar cada endpoint
     @Operation(

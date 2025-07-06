@@ -22,39 +22,35 @@ public class PagoService {
     // Atributos
     @Autowired
     private PagoRepository pagoRepo;
+
+    // Atributos
     @Autowired
     private WebClient usuarioWebClient;
+
+    // Atributos
     @Autowired
     private WebClient cursoWebClient;
 
-    
-    // Obtener un pago por su ID
+    // OBTENER UNO: Obtener un pago por su ID
     public Pago obtenerUno(int idPago) {
         return pagoRepo.findById(idPago).orElse(null);
     }
 
-    // Obtener todos los pagos
+    // OBTENER TODOS: Obtener todos los pagos
     public List<Pago> obtenerTodos() {
         return pagoRepo.findAll();
     }
 
-    // Registrar un pago con los datos de usuario y usuario (si existen)
+    // REGISTRAR PAGO: Registrar un pago con los datos de usuario y usuario (si existen)
     public Pago registrarPago(PagoCreate datosCrear) {
 
         try {
+
             // Ver si el usuario existe
-            usuarioWebClient.get()
-                .uri("/users/" + datosCrear.getIdUsuarioPago())
-                .retrieve()
-                .toBodilessEntity()
-                .block();   // Lanza excepción si es 404 en caso de que no esté
+            usuarioWebClient.get().uri("/users/" + datosCrear.getIdUsuarioPago()).retrieve().toBodilessEntity().block(); 
 
             // Lo mismo pero con el curso
-            cursoWebClient.get()
-                .uri("/courses/" + datosCrear.getIdCursoPago())
-                .retrieve()
-                .toBodilessEntity()
-                .block();   // Lanza excepción si es 404 en caso de que no esté
+            cursoWebClient.get().uri("/courses/" + datosCrear.getIdCursoPago()).retrieve().toBodilessEntity().block();   
 
             // Setteando los datos en caso de que estén bien
             Pago pago = new Pago();
@@ -62,6 +58,8 @@ public class PagoService {
             pago.setIdUsuarioPago(datosCrear.getIdUsuarioPago());
             pago.setIdCursoPago(datosCrear.getIdCursoPago());
             pago.setMontoPago(datosCrear.getMontoPago());
+            pago.setIdInscripcion(datosCrear.getIdInscripcion());
+
             return pagoRepo.save(pago);
             
         } catch (Exception e) {
@@ -69,5 +67,4 @@ public class PagoService {
         }
     }
 
-    
 }

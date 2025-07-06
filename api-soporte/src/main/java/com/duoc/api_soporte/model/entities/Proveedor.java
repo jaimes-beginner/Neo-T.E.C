@@ -15,28 +15,35 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "provider")               // Nombre de la tabla
+@Table(name = "provider")             
 public class Proveedor {
 
+    // ID PROVEEDOR: Identificador del proveedor
     @Id
     @GeneratedValue
     (strategy = GenerationType.IDENTITY)
-    private int idProveedor;                        // Identificador del proveedor
+    private int idProveedor;                      
 
+    // NOMBRE PROVEEDOR: Nombre del proveedor
     @Column(nullable = false)
-    private String nombreProveedor;                 // Nombre del proveedor
+    private String nombreProveedor;              
 
+    // RUT PROVEEDOR: Rut del proveedor
     @Column(nullable = false)
-    private String rutProveedor;                    // Rut del proveedor
+    private String rutProveedor;                   
 
+    // CORREO PROVEEDOR: Correo el proveedor
     @Column(nullable = false, unique = true)
-    private String correoProveedor;                 // Correo el proveedor
+    private String correoProveedor;                
 
-    private String fonoProveedor;                   // Telefono del proveedor
+    // FONO PROVEEDOR: Telefono del proveedor
+    private String fonoProveedor;                 
 
+    // DESCRIPCION SERVICIO PROVEEDOR: Descripcion del servicio que ofrece
     @Column(length = 1000)
-    private String descripcionServicioProveedor;    // Descripcion del servicio que ofrece
+    private String descripcionServicioProveedor;   
 
-    private Boolean estadoProveedor;                // Estado del proveedor
+    // ESTADO PROVEEDOR: Estado del proveedor
+    private Boolean estadoProveedor;                
 
 }

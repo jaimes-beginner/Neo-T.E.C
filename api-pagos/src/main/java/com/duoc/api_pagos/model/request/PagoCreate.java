@@ -12,13 +12,20 @@ import lombok.Data;
 @Data
 public class PagoCreate {
     
+    // ID CURSO PAGO: El id del curso  
     @NotNull
-    private int idCursoPago;            // El id del curso              
+    private int idCursoPago;                   
     
+    // ID USUARIO PAGO: El id del usuario 
     @NotNull
-    private int idUsuarioPago;          // El id del usuario 
+    private int idUsuarioPago;        
 
+    // MONTO PAGO: Monto que se está pagando
     @NotNull
-    private Double montoPago;           // Monto que se está pagando
+    private Double montoPago;         
+
+    // ID INSCRIPCION: la inscripcion que se va a pagar
+    @NotNull
+    private int idInscripcion;
 
 }

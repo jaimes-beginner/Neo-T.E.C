@@ -11,15 +11,20 @@ import lombok.Data;
 @Data
 public class CursoUpdate {
 
+    // ID CURSO: Identificador del curos para buscarlo
     @NotNull
-    private int idCurso;        // Identificador del curos para buscarlo
+    private int idCurso;        
 
-    private String tituloCurso;             // Titulo de curso
+    // TITULO CURSO: Titulo de curso
+    private String tituloCurso;         
 
-    private String descripcionCurso;        // Descripcion del curso
+    // DESCRIPCION CURSO: Descripcion del curso
+    private String descripcionCurso;     
 
-    private String categoriaCurso;          // Categoria del curso
+    // CATEGORIA CURSO: Categoria del curso
+    private String categoriaCurso;      
 
-    private Integer idInstructorCurso;          // Instructor a cargo del curso
+    // ID INSTRUCTOR CURSO: Instructor a cargo del curso
+    private Integer idInstructorCurso;          
     
 }

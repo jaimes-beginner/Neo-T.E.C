@@ -22,23 +22,17 @@ public class ReseniaService {
     @Autowired
     private ReseniaRepository reseniaRepo;
 
-
-
-    // Obtener todas las reseñas
+    // OBTENER TODOS: Obtener todas las reseñas
     public List<Resenia> obtenerTodos(){
         return reseniaRepo.findAll();
     }
 
-
-
-    // Obtener una reseña por ID 
+    // OBTENER UNO: Obtener una reseña por ID 
     public Resenia obtenerUno(int idResenia) {
         return reseniaRepo.findById(idResenia).orElse(null);
     }
 
-
-
-    // Dejar una reseña
+    // DEJAR RESENIA: Dejar una reseña
     public Resenia dejarResena(ReseniaCreate resena) {
         Resenia resenia = new Resenia();
 

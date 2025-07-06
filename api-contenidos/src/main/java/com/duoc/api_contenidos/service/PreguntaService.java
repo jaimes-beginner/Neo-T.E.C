@@ -20,17 +20,17 @@ public class PreguntaService {
     @Autowired
     private PreguntaRepository preguntaRepo;
 
-    // Obtener todas las preguntas
+    // OBTENER TODOS: Obtener todas las preguntas
     public List<Pregunta> obtenerTodos() {
         return preguntaRepo.findAll();
     }
 
-    // Obtener una pregunta por su id 
+    // OBTENER UNO: Obtener una pregunta por su id 
     public Pregunta obtenerUno(int id) {
         return preguntaRepo.findById(id).orElse(null);
     }
 
-    // Eliminar una pregunta
+    // ELIMINAR: Eliminar una pregunta
     public void eliminar(int id) {
         Pregunta pregunta = obtenerUno(id);
         if(pregunta == null) {

@@ -16,26 +16,31 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="ticket")                  // Nombre de la tabla
+@Table(name="ticket")            
 public class SoporteTicket {
 
+    // ID TICKET: Identificador del Ticket 
     @Id
-    @GeneratedValue
-    (strategy = GenerationType.IDENTITY)
-    private int idTicket;               // Identificador del Ticket 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idTicket;              
 
+    // ID USUARIO TICKET: Id del usuario quien hace el ticket
     @Column(nullable = false)
-    private int idUsuarioTicket;        // Id del usuario quien hace el ticket
+    private int idUsuarioTicket;      
 
+    // TEMA TICKET: Tema del Ticket 
     @Column(nullable = false)
-    private String temaTicket;          // Tema del Ticket 
+    private String temaTicket;     
 
+    // ESTADO TICKET: Estado del Ticket 
     @Column(nullable = false)
-    private String estadoTicket;        // Estado del Ticket 
+    private String estadoTicket;  
 
+    // RESPUESTA TICKET: Respuesta del ticket
     @Column(nullable = false)
-    private String respuestaTicket;     // Respuesta del ticket
+    private String respuestaTicket;   
     
-    private Date fechaTicket;           // Fecha en la que se hizo el ticket
+    // FECHA TICKET: Fecha en la que se hizo el ticket
+    private Date fechaTicket;        
 
 }

@@ -11,15 +11,20 @@ import lombok.Data;
 @Data
 public class ProgresoCreate {
     
+    // ID USUARIO PROGRESO: Id del usuario que se le quiere saber el progreso
     @NotNull
-    private int idUsuarioProgreso;          // Id del usuario que se le quiere saber el progreso
+    private int idUsuarioProgreso;         
 
+    // ID CURSO PROGRESO: Id del curso que se le quiere saber el progreso
     @NotNull
-    private int idCursoProgreso;            // Id del curso que se le quiere saber el progreso
+    private int idCursoProgreso;           
 
+    // PORCENTAJE PROGRESO: Porcentaje del progreso
     @NotNull
-    private int porcentajeProgreso;         // Porcentaje del progreso
+    private int porcentajeProgreso;     
 
-    private String ultimaActividadProgreso;         // Ultima actividad en este contexto
+    // ULTIMA ACTIVIDAD PROGRESO: Ultima actividad en este contexto
+    private String ultimaActividadProgreso;        
+
 
 }

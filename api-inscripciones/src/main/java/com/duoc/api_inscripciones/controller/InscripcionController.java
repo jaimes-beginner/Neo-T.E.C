@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.duoc.api_inscripciones.assemblers.InscripcionModelAssembler;
 import com.duoc.api_inscripciones.model.entity.Inscripcion;
 import com.duoc.api_inscripciones.model.request.InscripcionCreate;
+import com.duoc.api_inscripciones.model.request.PagoRequestDTO;
 import com.duoc.api_inscripciones.service.InscripcionService;
 import jakarta.validation.Valid;
 
@@ -36,8 +37,6 @@ public class InscripcionController {
     @Autowired
     private InscripcionModelAssembler assembler;
 
-
-
     // OBTENER UNO: devuelve una inscripcion según su ID
     @GetMapping("/{idInscripcion}")
     public ResponseEntity<EntityModel<Inscripcion>> obtenerUno(@PathVariable int idInscripcion) {
@@ -49,8 +48,6 @@ public class InscripcionController {
         }
         return ResponseEntity.ok(assembler.toModel(inscripcion));
     }
-
-
 
     // OBTENER POR USUARIO: devuelve todas las inscripciones de un usuario
     @GetMapping("/allForUser/{idUsuario}")
@@ -65,8 +62,6 @@ public class InscripcionController {
             linkTo(methodOn(InscripcionController.class).obtenerPorUsuario(idUsuario)).withSelfRel());
     }
 
-
-
     // OBTENER POR CURSO: devuelve todas las inscripciones de un curso
     @GetMapping("/allForCourse/{idCurso}")
     public CollectionModel<EntityModel<Inscripcion>> obtenerPorCurso(@PathVariable int idCurso) {
@@ -79,8 +74,6 @@ public class InscripcionController {
         return CollectionModel.of(inscripciones,
             linkTo(methodOn(InscripcionController.class).obtenerPorCurso(idCurso)).withSelfRel());
     }
-
-
 
     // OBTENER TODOS: devuelve todos las inscripciones en general
     @GetMapping("/all")
@@ -95,13 +88,19 @@ public class InscripcionController {
             linkTo(methodOn(InscripcionController.class).obtenerTodos()).withSelfRel());
     }
 
-
-
     // AGREGAR: crea-agrega una inscripcion según los datos (datosCreate)
     @PostMapping("/add")
     public ResponseEntity<EntityModel<Inscripcion>> agregar(@Valid @RequestBody InscripcionCreate datosCreate) {
         Inscripcion inscripcion = inscripcionServ.agregar(datosCreate);
         return ResponseEntity.ok(assembler.toModel(inscripcion));
     }
+
+        /*
+        // AGREGAR: crea-agrega una inscripcion según los datos (datosCreate)
+        @PostMapping("/add")
+        public Inscripcion agregar(@Valid @RequestBody InscripcionCreate datosCreate) {
+            return inscripcionServ.agregar(datosCreate);
+        }
+        */
 
 }

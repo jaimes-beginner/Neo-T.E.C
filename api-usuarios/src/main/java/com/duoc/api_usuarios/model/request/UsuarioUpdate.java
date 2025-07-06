@@ -10,13 +10,17 @@ import lombok.Data;
 @Data
 public class UsuarioUpdate {
     
-    private int idUsuario;          // Para buscar al usuario que se quiere modificar
+    // ID USUARIO: Para buscar al usuario que se quiere modificar
+    private int idUsuario;          
 
-    private String nombreUsuario;           // Nombre del usuario
+    // NOMBRE USUARIO: Nombre del usuario
+    private String nombreUsuario;          
 
-    private String correoUsuario;           // Correo del usuario
+    // CORREO USUARIO: Correo del usuario
+    private String correoUsuario;      
 
-    private String passwordUsuario;         // Constraseña del usuario
+    // PASSWORD USUARIO: Constraseña del usuario
+    private String passwordUsuario;        
 
 
 }

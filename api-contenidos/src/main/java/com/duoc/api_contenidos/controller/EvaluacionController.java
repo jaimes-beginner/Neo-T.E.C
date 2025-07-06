@@ -30,7 +30,6 @@ import jakarta.validation.Valid;
 @RequestMapping(value = "/evaluations", produces = MediaType.APPLICATION_JSON_VALUE)
 public class EvaluacionController {
     
-
     // Atributos
     @Autowired
     private EvaluacionService evaluacionServ;
@@ -38,8 +37,6 @@ public class EvaluacionController {
     // Atributos
     @Autowired
     private EvaluacionModelAssembler assembler;
-
-
 
     // OBTENER UNO: devuelve una evaluacion por su ID
     @GetMapping("/{idEvaluacion}")
@@ -51,16 +48,12 @@ public class EvaluacionController {
         return ResponseEntity.ok(assembler.toModel(evaluacion));
     }
     
-
-
     // OBTENER POR CONTENIDOS: devuelve las evaluaciones según el ID del contenido
     @GetMapping("/porContenido/{idContenido}")
     public ResponseEntity<List<Evaluacion>> obtenerPorContenido(@PathVariable int idContenido) {
         List<Evaluacion> evaluaciones = evaluacionServ.obtenerPorContenido(idContenido);
         return ResponseEntity.ok(evaluaciones);
     }
-
-
 
     // OBTENER TODOS: devuelve todas las evaluaciones en general
     @GetMapping("/todos")
@@ -75,8 +68,6 @@ public class EvaluacionController {
         );
     }
 
-
-
     // AGREGAR: agrega una evaluacion según los datos (datosCrear)
     @PostMapping("/agregar")
     public ResponseEntity<EntityModel<Evaluacion>> agregar(@Valid @RequestBody EvaluacionCreate datosCrear) {
@@ -84,8 +75,6 @@ public class EvaluacionController {
         return ResponseEntity.ok(assembler.toModel(evaluacion));
     }
 
-
-    
     // ELIMINAR: eliminar una evaluacion según su ID
     @DeleteMapping("/eliminar/{id}")
     public String eliminar(@PathVariable int id) {

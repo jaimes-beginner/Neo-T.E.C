@@ -29,28 +29,20 @@ public class EvaluacionService {
     @Autowired
     private ContenidoRepository contenidoRepo;
 
-
-
     // OBTENER TODOS: devuelve todas las evaluaciones
     public List<Evaluacion> obtenerTodos() {
         return evaluacionRepo.findAll();
     }
-
-
 
     // OBTENER UNO: devuelve una evaluacion por su ID
     public Evaluacion obtenerUno(int id) {
         return evaluacionRepo.findById(id).orElse(null);
     }
 
-
-
     // OBTENER POR CONTENIDO: obtiene todas las evaluaciones por el ID del contenido
     public List<Evaluacion> obtenerPorContenido(int idContenido) {
         return evaluacionRepo.findByContenido_IdContenido(idContenido);
     }
-
-
 
     // AGREGAR: crear-agregar una evaluacion con sus respectivas pregúntas
     public Evaluacion agregar(EvaluacionCreate datosCrear) {
@@ -89,8 +81,6 @@ public class EvaluacionService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
-
-
 
     // ELIMINAR: elimina una evaluacion por su ID
     public void eliminar(int id) {

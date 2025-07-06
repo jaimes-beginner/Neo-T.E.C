@@ -12,6 +12,4 @@ import com.duoc.api_contenidos.model.entity.Pregunta;
 @Repository
 public interface PreguntaRepository extends JpaRepository<Pregunta, Integer>{
     
-    // Métodos para acceder a los datos de la base de datos...
-
 }

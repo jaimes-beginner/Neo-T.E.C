@@ -12,6 +12,4 @@ import com.duoc.api_soporte.model.entities.Proveedor;
 @Repository
 public interface ProveedorRepository extends JpaRepository<Proveedor, Integer>{
    
-    // Métodos para acceder a los datos de proveedores...
-
 }

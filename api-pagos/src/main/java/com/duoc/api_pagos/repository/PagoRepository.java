@@ -11,7 +11,5 @@ import com.duoc.api_pagos.model.entity.Pago;
 
 @Repository
 public interface PagoRepository extends JpaRepository<Pago, Integer>{
-    
-    // Métodos para acceder a los datos de la base de datos...
 
 }

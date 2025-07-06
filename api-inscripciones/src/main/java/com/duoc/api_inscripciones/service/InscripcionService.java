@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.duoc.api_inscripciones.model.entity.Inscripcion;
 import com.duoc.api_inscripciones.model.request.CursoDTO;
 import com.duoc.api_inscripciones.model.request.InscripcionCreate;
+import com.duoc.api_inscripciones.model.request.PagoRequestDTO;
 import com.duoc.api_inscripciones.model.request.UsuarioDTO;
 import com.duoc.api_inscripciones.repository.InscripcionRepository;
 
@@ -34,50 +35,40 @@ public class InscripcionService {
     @Autowired
     private WebClient cursoWebClient;
 
+    // Autowired
+    @Autowired
+    private WebClient pagoWebClient;
 
-    
-    // Obtener todos los inscripción
+    // OBTENER TODOS: Obtener todos los inscripción
     public List<Inscripcion> obtenerTodos() {
         return inscripcionRepo.findAll();
     }
 
-
-
-    // Obtener todas las inscripciones por el ID del usuario
+    // OBTENER POR USUARIO: Obtener todas las inscripciones por el ID del usuario
     public List<Inscripcion> obtenerPorUsuario(int idUsuario) {
         return inscripcionRepo.findAllByIdUsuarioInscripcion(idUsuario);
     }
 
-
-
-    // Obtener todas las inscripciones que tuvo un curso, según su ID
+    // OBTENER POR CURSO: Obtener todas las inscripciones que tuvo un curso, según su ID
     public List<Inscripcion> obtenerPorCurso(int idCurso) {
         return inscripcionRepo.findAllByIdCursoInscripcion(idCurso);
     }
 
-
-
-    // Obtener una inscripcion por su id 
+    // OBTENER UNO: Obtener una inscripcion por su id 
     public Inscripcion obtenerUno(int id) {
         return inscripcionRepo.findById(id).orElse(null);
     }
 
-
-
-    // Verificar si el usuario existe
+    // EXISTENCIA USUARIO: Devuelve un True si el usuario existe, de lo contrario un False
     public Boolean existenciaUsuario(int idUsuario) {
         try {
             System.out.println("Verificando existencia del usuario con ID: " + idUsuario);
             
+            // Verificar si el usuario existe
             UsuarioDTO usuario = usuarioWebClient.get()
-                .uri("/users/{idUsuario}", idUsuario)
-                .retrieve()
-                .bodyToMono(UsuarioDTO.class)
-                .block();
+                .uri("/users/{idUsuario}", idUsuario).retrieve().bodyToMono(UsuarioDTO.class).block();
 
-            System.out.println("Resultado de llamada al microservicio de usuarios: " + usuario);
             return usuario != null;
-
         } catch (WebClientResponseException.NotFound e) {
             System.out.println("Usuario no encontrado (404) para ID: " + idUsuario);
             return false;
@@ -87,11 +78,11 @@ public class InscripcionService {
         }
     }
 
-
-
-    // Verificar si el curso existe
+    // EXISTENIA CURSO: Devuelve un True si el curso existe, de lo contrario un False
     public Boolean existenciaCurso(int idCurso) {
         try {
+
+            // Verificar si el curso existe
             CursoDTO curso = cursoWebClient.get()
                 .uri("/courses/{idCurso}", idCurso).retrieve().bodyToMono(CursoDTO.class).block();
 
@@ -103,11 +94,8 @@ public class InscripcionService {
         }
     }
 
-
-
-    // Inscribir a un usuario, verificando si en primer lugar existe el mismo y el curso
+    // AGREGAR: Inscribir a un usuario, verificando si en primer lugar existe el mismo y el curso
     public Inscripcion agregar(InscripcionCreate datosCrear) {
-        Inscripcion inscripcion = new Inscripcion();
 
         // Verificar que no haya inscripciones duplicadas
         if(inscripcionRepo.existsByIdUsuarioInscripcionAndIdCursoInscripcion(datosCrear.getIdUsuario(),datosCrear.getIdCurso())) {
@@ -124,21 +112,36 @@ public class InscripcionService {
             throw new IllegalArgumentException("Curso no encontrado");
         }
 
+        // Crear objeto inscripcion
+        Inscripcion inscripcion = new Inscripcion();
+
+        // Setteando datos del negocio
+        inscripcion.setFechaInscripcion(new Date());
+        inscripcion.setEstadoInscripcion(true);
+
         // Setteando los datos los cursos
-        try {
-            inscripcion.setFechaInscripcion(new Date());
-            inscripcion.setEstadoInscripcion(true);
-            inscripcion.setIdUsuarioInscripcion(datosCrear.getIdUsuario());
-            inscripcion.setIdCursoInscripcion(datosCrear.getIdCurso());
-            return inscripcionRepo.save(inscripcion);
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
+        inscripcion.setIdUsuarioInscripcion(datosCrear.getIdUsuario());
+        inscripcion.setIdCursoInscripcion(datosCrear.getIdCurso());
+        inscripcionRepo.save(inscripcion);
+
+
+        // Crear objeto de pago
+        PagoRequestDTO pagoDTO = new PagoRequestDTO();
+
+            pagoDTO.setIdCursoPago(inscripcion.getIdCursoInscripcion());
+            pagoDTO.setIdUsuarioPago(inscripcion.getIdUsuarioInscripcion());
+            pagoDTO.setMontoPago(datosCrear.getMontoInscripcion()); 
+            pagoDTO.setFechaPago(new Date());
+            pagoDTO.setIdInscripcion(inscripcion.getIdInscripcion());
+
+
+        // Llamada al microservicio de pagos
+        pagoWebClient.post().uri("/pay/add").bodyValue(pagoDTO).retrieve().bodyToMono(Void.class).block();
+
+        return inscripcion;
     }
 
-
-
-    // Eliminar una inscripción
+    // ELIMINAR: Eliminar una inscripción
     public void eliminar(int id) {
         Inscripcion inscripcion = obtenerUno(id);
         if(inscripcion == null) {
@@ -146,6 +149,5 @@ public class InscripcionService {
         }
         inscripcionRepo.delete(inscripcion);
     }
-
 
 }

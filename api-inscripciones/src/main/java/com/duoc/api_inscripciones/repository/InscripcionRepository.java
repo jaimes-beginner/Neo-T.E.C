@@ -13,8 +13,12 @@ import com.duoc.api_inscripciones.model.entity.Inscripcion;
 @Repository
 public interface InscripcionRepository extends JpaRepository<Inscripcion, Integer> {
 
-    // Métodos apra acceder a la base de datos
+    // Métodos para acceder a la base de datos
     List<Inscripcion> findAllByIdUsuarioInscripcion(int idUsuarioInscripcion);
+
+    // Métodos para acceder a la base de datos
     List<Inscripcion> findAllByIdCursoInscripcion(int idCursoInscripcion);
+
+    // Métodos para acceder a la base de datos
     Boolean existsByIdUsuarioInscripcionAndIdCursoInscripcion(int idUsuario, int idCurso);
 }

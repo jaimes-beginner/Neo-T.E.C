@@ -12,16 +12,20 @@ import lombok.Data;
 @Data
 public class ReseniaCreate {
 
+    // TEXTO RESENIA: Cuerpo de la reseña
     @NotBlank
-    private String textoResenia;            // Cuerpo de la reseña
+    private String textoResenia;           
 
+    // PUNTUACION RESENIA: Nota de la Reseña
     @NotNull
-    private int puntuacionResenia;          // Nota de la Reseña
+    private int puntuacionResenia;      
 
-        @NotNull
-    private int idUsuarioResenia;           // Id del usuario que hizo la reseña
+    // ID USUARIO RESENIA: Id del usuario que hizo la reseña
+    @NotNull
+    private int idUsuarioResenia;          
 
-        @NotNull
-    private int idCursoResenia;             // Id del en donde se hizo de la reseña
+    // ID CURSO RESENIA: Id del en donde se hizo de la reseña
+    @NotNull
+    private int idCursoResenia;            
 
 }

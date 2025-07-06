@@ -19,23 +19,18 @@ import com.duoc.api_contenidos.service.PreguntaService;
 @RestController
 @RequestMapping(value = "/questions", produces = MediaType.APPLICATION_JSON_VALUE)
 public class PreguntaController {
-    
 
     // Atributos
     @Autowired
     private PreguntaService preguntaServ;
 
-
-
-    // Obtener todos las preguntas
+    // OBTENER TODOS: Obtener todos las preguntas
     @GetMapping("/all")
     public List<Pregunta> obtenerTodos() {
         return preguntaServ.obtenerTodos();
     }
 
-
-    
-    // Eliminar una pregunta
+    // ELIMINAR: Eliminar una pregunta
     @DeleteMapping("/remove/{id}")
     public String eliminar(@PathVariable int id) {
         preguntaServ.eliminar(id);

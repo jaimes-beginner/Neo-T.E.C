@@ -20,42 +20,31 @@ import com.duoc.api_usuarios.repository.UsuarioRepository;
 @Service
 public class UsuarioService {
  
-
     // Atributos
     @Autowired
     private UsuarioRepository usuarioRepo;
 
-
-
-    // Obtener todos los usuarios
+    // OBTENER TODOS: Obtener todos los usuarios
     public List<Usuario> obtenerTodos() {
         return usuarioRepo.findAll();
     }
 
-
-
-    // Obtener todos los usuarios activos
+    // OBTENER ACTIVOS: Obtener todos los usuarios activos
     public List<Usuario> obtenerActivos() {
         return usuarioRepo.findAllByEstadoUsuario(true);
     }
 
-
-
-    // Obtener un usuario
+    // OBTENER UNO: Obtener un usuario
     public Usuario obtenerUno(int id) {
         return usuarioRepo.findById(id).orElse(null);
     }
 
-
-
-    // Obtener un usuario por su email
+    // OBTENER POR EMAIL: Obtener un usuario por su email
     public Usuario obtenerPorEmail(String email) {
         return usuarioRepo.findAByCorreoUsuario(email);
     }
 
-
-
-    // Agregar un usuario
+    // AGREGAR: Agregar un usuario
     public Usuario agregar(UsuarioCreate datosCrear) {
         Usuario usuario = new Usuario();
 
@@ -78,17 +67,13 @@ public class UsuarioService {
         }
     }
 
-
-
-    // Hashear la constraña del usuario
+    // HASH PASSWORD: Hashear la constraña del usuario
     private String hashPassword(String password){
         BCryptPasswordEncoder hasheador = new BCryptPasswordEncoder();
         return hasheador.encode(password);
     }
 
-
-
-    // Eliminar un usuario por su id
+    // ELIMINAR: Eliminar un usuario por su id
     public void eliminar(int id) {
         Usuario usuarioEliminar = obtenerUno(id);
         if(usuarioEliminar == null) {
@@ -98,9 +83,7 @@ public class UsuarioService {
         usuarioRepo.save(usuarioEliminar);
     }
 
-
-
-    // Modificar la información de un usuario por su id (datosModificar)
+    // MODIFICAR: Modificar la información de un usuario por su id (datosModificar)
     public Usuario modificar(UsuarioUpdate datosModificar) {
         Usuario usuarioModificar = obtenerUno(datosModificar.getIdUsuario());
         if(usuarioModificar == null) {

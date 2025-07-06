@@ -19,26 +19,19 @@ import com.duoc.api_soporte.repository.SoporteTicketRepository;
 @Service
 public class SoporteTicketService {
 
-
     // Autowired
     @Autowired
     private SoporteTicketRepository soporteRepo;
-
-
 
     // OBTENER TODOS: devuelve todos los tickets de soporte
     public List<SoporteTicket> obtenerTodos(){
         return soporteRepo.findAll();
     }
 
-
-
     // OBTENER UNO: devuelve un ticket de soporte según su ID
     public SoporteTicket obtenerUno(int id) {
         return soporteRepo.findById(id).orElse(null);
     }
-
-
 
     // CREAR TICKET: crea un ticket de soporte según los datos (datosCrear)
     public SoporteTicket crearTicket(SoporteTicketCreate datosCrear) {
@@ -55,8 +48,6 @@ public class SoporteTicketService {
         }
     }
 
-
-
     // MODIFICAR TICKET: modifica un ticket según sus datos (datosModificar)
     public SoporteTicket ModificarTicket(SoporteTicketUpdate datosModificar) {
         SoporteTicket soporteModificar = obtenerUno(datosModificar.getIdTicket());
@@ -68,6 +59,5 @@ public class SoporteTicketService {
         soporteModificar.setRespuestaTicket(datosModificar.getRespuestaTicket());
         return soporteRepo.save(soporteModificar);
     }
-
 
 }

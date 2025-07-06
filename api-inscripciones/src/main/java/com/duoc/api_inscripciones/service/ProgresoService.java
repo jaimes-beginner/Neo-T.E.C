@@ -19,26 +19,21 @@ public class ProgresoService {
     @Autowired
     private ProgresoRepository progresoRepo;
 
-
-
-    // Obtener un progreso según su ID
+    // OBTENER UNO: Obtener un progreso según su ID
     public Progreso obtenerUno(int idProgreso) {
         return progresoRepo.findById(idProgreso).orElse(null);
     }
 
-
-
-    // Obtener el progreso de un alumno
+    // OBTENER SEGUN DATOS: Obtener el progreso de un alumno
     public Progreso obtenerSegunDatos(int idUsuario, int idCurso) {
         return progresoRepo.findByIdUsuarioProgresoAndIdCursoProgreso(idUsuario, idCurso).orElse(null);
     }
 
-
-
-    // Actualizar el progreso de un usuario
+    // ACTUALIZAR PROGRESO: Actualizar el progreso de un usuario
     public Progreso actualizarProgreso(ProgresoUpdate datosModificar) {
         Progreso progreso = progresoRepo.findByIdUsuarioProgresoAndIdCursoProgreso(datosModificar.getIdUsuarioProgreso(), datosModificar.getIdCursoProgreso())
-        // Que hacer en caso de que no exista
+        
+        // Si no hay un progreso, hacer lo siguiente:
         .orElseGet(() -> {
                 Progreso nuevoProgreso = new Progreso();
                 nuevoProgreso.setIdUsuarioProgreso(datosModificar.getIdUsuarioProgreso());

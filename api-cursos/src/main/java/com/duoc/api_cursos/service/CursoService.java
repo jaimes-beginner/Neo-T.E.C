@@ -23,23 +23,17 @@ public class CursoService {
     @Autowired
     private CursoRepository cursoRepo;
 
-
-
-    // Obtener todos los cursos
+    // OBTENER TODOS: Obtener todos los cursos
     public List<Curso> obtenerTodos() {
         return cursoRepo.findAll();
     }
 
-
-
-    // Obtener un curso por su id 
+    // OBTENER UNO: Obtener un curso por su id 
     public Curso obtenerUno(int id) {
         return cursoRepo.findById(id).orElse(null);
     }
 
-
-
-    // Agregar un curso
+    // AGREGAR: Agregar un curso
     public Curso agregar(CursoCreate datosCrear) {
         Curso curso = new Curso();
         try{
@@ -55,9 +49,7 @@ public class CursoService {
         }
     }
 
-
-
-    // Publicar un curso
+    // PUBLICAR UN CURSO: Publicar un curso
     public Curso publicarUnCurso(int id) {
         Curso cursoPublicar = obtenerUno(id);
         if(cursoPublicar == null) {
@@ -67,9 +59,7 @@ public class CursoService {
         return cursoRepo.save(cursoPublicar);
     }   
 
-
-
-    // Eliminar un curso por su id
+    // ELIMINAR: Eliminar un curso por su id
     public void eliminar(int id) {
         Curso curso = obtenerUno(id);
         if(curso == null) {
@@ -78,9 +68,7 @@ public class CursoService {
         cursoRepo.delete(curso);
     }
 
-
-
-    // Modificar un curso por su id (datosModificar)
+    // MODIFICAR: Modificar un curso por su id (datosModificar)
     public Curso modificar(CursoUpdate datosModificar) {
         Curso curso = obtenerUno(datosModificar.getIdCurso());
         if(curso == null) {

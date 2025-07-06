@@ -10,11 +10,15 @@ import lombok.Data;
 @Data
 public class SoporteTicketUpdate {
     
-    private int idTicket;           // Para buscar el ticket
+    // ID TICKET: Para buscar el ticket
+    private int idTicket;         
 
-    private String temaTicket;      // El tema del ticket
+    // TEMA TICKET: El tema del ticket
+    private String temaTicket;    
 
-    private String estadoTicket;    // El estado del ticket
+    // ESTADO TICKET: El estado del ticket
+    private String estadoTicket;  
 
+    // RESPUESTA TICKET: Breve respuesta del ticket 
     private String respuestaTicket;
 }

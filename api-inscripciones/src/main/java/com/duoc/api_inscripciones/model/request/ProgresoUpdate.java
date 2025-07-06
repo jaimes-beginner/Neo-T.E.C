@@ -13,13 +13,17 @@ import lombok.Data;
 @Data
 public class ProgresoUpdate {
     
+    // ID PROGRESO: El id del progreso para buscarlo
     @NotNull
-    private int idProgreso;         // El id del progreso para buscarlo
+    private int idProgreso;        
     
-    private int idUsuarioProgreso;          // Id del usuario que se le quiere saber el progreso
+    // ID USUARIO PROGRESO: Id del usuario que se le quiere saber el progreso
+    private int idUsuarioProgreso;         
 
-    private int idCursoProgreso;            // Id del curso que se le quiere saber el progreso
+    // ID CURSO PROGRESO: Id del curso que se le quiere saber el progreso
+    private int idCursoProgreso;  
 
-    private Double porcentajeProgreso;         // Porcentaje del progreso
+    // PORCENTAJE PROGRESO: Porcentaje del progreso
+    private Double porcentajeProgreso;   
 
 }

@@ -30,7 +30,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RequestMapping("/tickets")
 public class SoporteTicketController {
     
-    
     // Atributos
     @Autowired
     private SoporteTicketService soporteTiServe;
@@ -39,9 +38,7 @@ public class SoporteTicketController {
     @Autowired
     private SoporteModelAssembler assembler;
 
-
-
-    // Obtener todos los tickets con HATEOAS
+    // OBTENER TODOS: Obtener todos los tickets con HATEOAS
     @GetMapping("/all")
     public CollectionModel<EntityModel<SoporteTicket>> obtenerTodos() {
         List<EntityModel<SoporteTicket>> tickets = soporteTiServe.obtenerTodos().stream()
@@ -52,30 +49,23 @@ public class SoporteTicketController {
                 linkTo(methodOn(SoporteTicketController.class).obtenerTodos()).withSelfRel());
     }
 
-
-
-    // Obtener un ticket por su ID con HATEOAS
+    // OBTENER UNO: Obtener un ticket por su ID con HATEOAS
     @GetMapping("/{id}")
     public EntityModel<SoporteTicket> obtenerUno(@PathVariable int id) {
         SoporteTicket ticket = soporteTiServe.obtenerUno(id);
         return assembler.toModel(ticket);
     }
-  
 
-
-    // Modificar un ticket
+    // CANCELAR: Modificar un ticket
     @PutMapping("/updateStatus")
-    public SoporteTicket cancelar(@RequestBody @Valid  SoporteTicketUpdate datosModificar) {
+    public SoporteTicket cancelar(@RequestBody @Valid SoporteTicketUpdate datosModificar) {
         return soporteTiServe.ModificarTicket(datosModificar);
     }
 
-
-
-    // Crear un ticket
+    // CREAR TICKET: Crear un ticket
     @PostMapping("/add")
     public SoporteTicket crearTicket(@RequestBody @Valid SoporteTicketCreate soCreated) {
         return soporteTiServe.crearTicket(soCreated);
-
     }
 
 }

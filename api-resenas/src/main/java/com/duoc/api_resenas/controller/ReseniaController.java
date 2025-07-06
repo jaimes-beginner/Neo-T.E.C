@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/resenia")
 public class ReseniaController {
 
-    
     // Atributos
     @Autowired
     private ReseniaService reseniaServ;
@@ -37,9 +36,7 @@ public class ReseniaController {
     @Autowired
     private ReseniaModelAssembler assembler;
 
-
-
-    // Obtener una resenia por su ID, con sus modificaciones para el HATEOAS
+    // OBTENER UNO: Obtener una resenia por su ID, con sus modificaciones para el HATEOAS
     @GetMapping("/{idResena}")
     public ResponseEntity<EntityModel<Resenia>> obtenerUno(@PathVariable int idResena) {
         Resenia resenia = reseniaServ.obtenerUno(idResena);
@@ -49,9 +46,7 @@ public class ReseniaController {
         return ResponseEntity.ok(assembler.toModel(resenia));
     }
 
-
-
-    // Obtener todos las reseñas
+    // OBTENER TODOS: Obtener todos las reseñas
     @GetMapping("/all")
     public CollectionModel<EntityModel<Resenia>> obtenerTodos() {
         List<EntityModel<Resenia>> resenia = reseniaServ.obtenerTodos().stream()
@@ -62,9 +57,7 @@ public class ReseniaController {
             linkTo(methodOn(ReseniaController.class).obtenerTodos()).withSelfRel());
     }
 
-
-
-    // Crear reseña
+    // CREAR RESENIA: Crear reseña
     @PostMapping("/add")
     public Resenia crearResenia(@RequestBody @Valid ReseniaCreate reCreate) {
         return reseniaServ.dejarResena(reCreate);

@@ -18,12 +18,15 @@ import lombok.Data;
 @Table(name = "roles")          // Nombre de la tabla
 public class Rol {
 
+    // ID ROL: Identificador del rol
     @Id
-    @GeneratedValue
-    (strategy = GenerationType.IDENTITY)
-    private int idRol;                      // Identificador del rol
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idRol;                     
 
+    // NOMBRE ROL: Nombre del rol
     @Column(nullable = false)
-    private String nombreRol;               // Nombre del rol
+    private String nombreRol;           
 
 }
+
+

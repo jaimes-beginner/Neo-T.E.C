@@ -23,9 +23,11 @@ import com.duoc.api_usuarios.service.UsuarioService;
 
 public class CrearUsuarioTest {
 
+    // Instanciar un repositorio falso
     @Mock
     private UsuarioRepository usuarioRepo;
 
+    // Instanciar e injectar @Mock en cada uno de los métodos para usarlos
     @InjectMocks
     private UsuarioService usuarioServ;
 

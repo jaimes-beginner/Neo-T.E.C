@@ -13,12 +13,7 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UsuarioDTO {
     
+    // ID USUARIO: Id del usuario para buscarlo
     private int idUsuario;
-    private String nombreUsuario;
-    private String correoUsuario;
-    private String passwordUsuario;
-    private String rolUsuario;
-    private boolean estadoUsuario;
-    private String fechaRegistro;
 
 }

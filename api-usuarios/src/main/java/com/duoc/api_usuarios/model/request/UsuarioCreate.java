@@ -11,16 +11,20 @@ import lombok.Data;
 @Data
 public class UsuarioCreate {
     
+    // NOMBRE USUARIO: Nombre del usuario
     @NotBlank
-    private String nombreUsuario;           // Nombre del usuario
+    private String nombreUsuario;        
 
+    // CORREO USUARIO: Correo del usuario
     @NotBlank
-    private String correoUsuario;           // Correo del usuario
+    private String correoUsuario;     
 
+    // PASSWORD USUARIO: Constraseña del usuario
     @NotBlank
-    private String passwordUsuario;         // Constraseña del usuario
+    private String passwordUsuario;        
 
+    // ROL USUARIO: Rol del usuario
     @NotBlank
-    private String rolUsuario;              // Rol del usuario
+    private String rolUsuario;            
 
 }

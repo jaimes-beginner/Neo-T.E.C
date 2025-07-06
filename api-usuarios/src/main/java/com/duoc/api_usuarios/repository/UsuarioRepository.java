@@ -16,7 +16,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     // Métodos para buscar en la base de datos...
     List<Usuario> findAllByEstadoUsuario(Boolean estadoUsuario);
+
+    // Métodos para buscar en la base de datos...
     Usuario findAByCorreoUsuario(String correoUsuario);
+
+    // Métodos para buscar en la base de datos...
     Boolean existsByCorreoUsuario(String correoUsuario);
     
 }

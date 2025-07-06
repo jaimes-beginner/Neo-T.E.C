@@ -19,20 +19,28 @@ import lombok.Data;
 @Table(name = "payments")           // Nombre de la tabla
 public class Pago {
 
+    // ID PAGO: Identificador del pago
     @Id
-    @GeneratedValue
-    (strategy = GenerationType.IDENTITY)
-    private int idPago;                     // Identificador del pago
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idPago;                    
 
+    // ID CURSO PAGO: El id del curso al que se le hizo el pago
     @Column(nullable = false)
-    private int idCursoPago;                // El id del curso al que se le hizo el pago
+    private int idCursoPago;               
     
+    // ID USUARIO PAGO: El id del usuario que está compranddo el curso
     @Column(nullable = false)
-    private int idUsuarioPago;              // El id del usuario que está compranddo el curso
+    private int idUsuarioPago;             
 
+    // MONTO PAGO: El monto que se está pagando por el curso  
     @Column(nullable = false)
-    private Double montoPago;               // El monto que se está pagando por el curso  
+    private Double montoPago;              
 
-    private Date fechaPago;                 // Fecha del pago
+    // FECHA PAGO: Fecha del pago
+    private Date fechaPago;                 
+
+    // ID INSCRIPCION: la inscripcion que se va a pagar
+    @Column(nullable = false)
+    private int idInscripcion;
 
 }
