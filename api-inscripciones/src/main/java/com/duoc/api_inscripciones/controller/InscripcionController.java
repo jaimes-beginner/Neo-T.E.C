@@ -21,6 +21,8 @@ import com.duoc.api_inscripciones.model.entity.Inscripcion;
 import com.duoc.api_inscripciones.model.request.InscripcionCreate;
 import com.duoc.api_inscripciones.model.request.PagoRequestDTO;
 import com.duoc.api_inscripciones.service.InscripcionService;
+
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 /*------------------------------------------*/
@@ -37,6 +39,12 @@ public class InscripcionController {
     @Autowired
     private InscripcionModelAssembler assembler;
 
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener una inscripción",
+        description = "Obtiene una inscripción por su ID."
+    )
+
     // OBTENER UNO: devuelve una inscripcion según su ID
     @GetMapping("/{idInscripcion}")
     public ResponseEntity<EntityModel<Inscripcion>> obtenerUno(@PathVariable int idInscripcion) {
@@ -48,6 +56,12 @@ public class InscripcionController {
         }
         return ResponseEntity.ok(assembler.toModel(inscripcion));
     }
+
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener por usuario",
+        description = "Obtiene todas las inscripciones por el ID del usuario."
+    )
 
     // OBTENER POR USUARIO: devuelve todas las inscripciones de un usuario
     @GetMapping("/allForUser/{idUsuario}")
@@ -62,6 +76,12 @@ public class InscripcionController {
             linkTo(methodOn(InscripcionController.class).obtenerPorUsuario(idUsuario)).withSelfRel());
     }
 
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener por curso",
+        description = "Obtiene las inscripciones por el ID del curso."
+    )
+
     // OBTENER POR CURSO: devuelve todas las inscripciones de un curso
     @GetMapping("/allForCourse/{idCurso}")
     public CollectionModel<EntityModel<Inscripcion>> obtenerPorCurso(@PathVariable int idCurso) {
@@ -75,6 +95,12 @@ public class InscripcionController {
             linkTo(methodOn(InscripcionController.class).obtenerPorCurso(idCurso)).withSelfRel());
     }
 
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener todas las inscripciones",
+        description = "Obtener todas las inscripciones registradas."
+    )
+
     // OBTENER TODOS: devuelve todos las inscripciones en general
     @GetMapping("/all")
     public CollectionModel<EntityModel<Inscripcion>> obtenerTodos() {
@@ -87,6 +113,12 @@ public class InscripcionController {
         return CollectionModel.of(inscripciones,
             linkTo(methodOn(InscripcionController.class).obtenerTodos()).withSelfRel());
     }
+
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Agregar una inscripcion",
+        description = "Agrega una inscripcion, además de realizar el pago del mismo automáticamente siempre y cuando el usuario y el curso exista."
+    )
 
     // AGREGAR: crea-agrega una inscripcion según los datos (datosCreate)
     @PostMapping("/add")

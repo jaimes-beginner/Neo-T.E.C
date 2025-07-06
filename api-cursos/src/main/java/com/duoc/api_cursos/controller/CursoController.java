@@ -22,6 +22,8 @@ import com.duoc.api_cursos.model.entity.Curso;
 import com.duoc.api_cursos.model.request.CursoCreate;
 import com.duoc.api_cursos.model.request.CursoUpdate;
 import com.duoc.api_cursos.service.CursoService;
+
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 /*------------------------------------------*/
@@ -38,6 +40,12 @@ public class CursoController {
     @Autowired 
     private CursoModelAssembler assembler;
 
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener un curso",
+        description = "Obtiene un curso por su ID."
+    )
+
     // OBTENER UNO: Obtener curso con las modificaciones para el Assembler
     @GetMapping("/{idCurso}")
     public ResponseEntity<EntityModel<Curso>> obtenerUno(@PathVariable int idCurso) {
@@ -47,6 +55,12 @@ public class CursoController {
         }
         return ResponseEntity.ok(assembler.toModel(curso));
     }
+
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener todos los cursos",
+        description = "Obtiene todos los cursos registrados."
+    )
 
     // OBTENER TODOS: Obtener todos los cursos con las modificaciones para el Assembler
     @GetMapping("/all")
@@ -59,6 +73,12 @@ public class CursoController {
             linkTo(methodOn(CursoController.class).obtenerTodos()).withSelfRel());
     }
 
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Agregar un curso",
+        description = "Agrega un curso que no exista con anterioridad."
+    )
+
     // AGREGAR: Agregar un curso
     @PostMapping("/add")
     public ResponseEntity<EntityModel<Curso>> agregar(@Valid @RequestBody CursoCreate datosCrear) {
@@ -66,12 +86,24 @@ public class CursoController {
         return ResponseEntity.ok(assembler.toModel(curso));
     }
 
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Eliminar un curso",
+        description = "Eliminar un curso por su ID, siempre y cuando exista."
+    )
+
     // ELIMINAR: Eliminar un curso dependiendo de su ID
     @PutMapping("/remove/{id}")
     public String eliminar(@PathVariable int id) {
         cursoServ.eliminar(id);
         return "Curso eliminado!";
     }
+
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Modificar un curso",
+        description = "Modifica un curso siempre y cuando exista."
+    )
 
     // MODIFICAR: Modificar un curso dependiendo de su ID
     @PutMapping("/modify/{id}")

@@ -18,6 +18,8 @@ import com.duoc.api_resenas.assemblers.ReseniaModelAssembler;
 import com.duoc.api_resenas.models.entities.Resenia;
 import com.duoc.api_resenas.models.request.ReseniaCreate;
 import com.duoc.api_resenas.service.ReseniaService;
+
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,6 +38,12 @@ public class ReseniaController {
     @Autowired
     private ReseniaModelAssembler assembler;
 
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener una resenia",
+        description = "Obtiene una resenia por su ID."
+    )
+
     // OBTENER UNO: Obtener una resenia por su ID, con sus modificaciones para el HATEOAS
     @GetMapping("/{idResena}")
     public ResponseEntity<EntityModel<Resenia>> obtenerUno(@PathVariable int idResena) {
@@ -45,6 +53,12 @@ public class ReseniaController {
         }
         return ResponseEntity.ok(assembler.toModel(resenia));
     }
+
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener todas las resenias",
+        description = "Obtiene todas las resenias."
+    )
 
     // OBTENER TODOS: Obtener todos las reseñas
     @GetMapping("/all")
@@ -56,6 +70,12 @@ public class ReseniaController {
         return CollectionModel.of(resenia,
             linkTo(methodOn(ReseniaController.class).obtenerTodos()).withSelfRel());
     }
+
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Crear una resenia",
+        description = "Crea una resenia desde cero."
+    )
 
     // CREAR RESENIA: Crear reseña
     @PostMapping("/add")

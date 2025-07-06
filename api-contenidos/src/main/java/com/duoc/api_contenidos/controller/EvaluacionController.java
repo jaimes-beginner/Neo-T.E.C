@@ -22,6 +22,8 @@ import com.duoc.api_contenidos.assemblers.EvaluacionModelAssembler;
 import com.duoc.api_contenidos.model.entity.Evaluacion;
 import com.duoc.api_contenidos.model.request.EvaluacionCreate;
 import com.duoc.api_contenidos.service.EvaluacionService;
+
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 /*------------------------------------------*/
@@ -38,6 +40,12 @@ public class EvaluacionController {
     @Autowired
     private EvaluacionModelAssembler assembler;
 
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener una evaluación",
+        description = "Obtiene una evaluación por su ID."
+    )
+
     // OBTENER UNO: devuelve una evaluacion por su ID
     @GetMapping("/{idEvaluacion}")
     public ResponseEntity<EntityModel<Evaluacion>> obtenerUno(@PathVariable int idEvaluacion) {
@@ -48,12 +56,24 @@ public class EvaluacionController {
         return ResponseEntity.ok(assembler.toModel(evaluacion));
     }
     
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener por contenidos",
+        description = "Obtiene todas las evaluaciónes por su contenido."
+    )
+
     // OBTENER POR CONTENIDOS: devuelve las evaluaciones según el ID del contenido
     @GetMapping("/porContenido/{idContenido}")
     public ResponseEntity<List<Evaluacion>> obtenerPorContenido(@PathVariable int idContenido) {
         List<Evaluacion> evaluaciones = evaluacionServ.obtenerPorContenido(idContenido);
         return ResponseEntity.ok(evaluaciones);
     }
+
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener todas las evaluaciónes",
+        description = "Obtiene todas las evaluaciónes registradas."
+    )
 
     // OBTENER TODOS: devuelve todas las evaluaciones en general
     @GetMapping("/todos")
@@ -68,12 +88,24 @@ public class EvaluacionController {
         );
     }
 
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Agregar una evaluación",
+        description = "Agrega una evaluación junto con sus pregúntas."
+    )
+
     // AGREGAR: agrega una evaluacion según los datos (datosCrear)
     @PostMapping("/agregar")
     public ResponseEntity<EntityModel<Evaluacion>> agregar(@Valid @RequestBody EvaluacionCreate datosCrear) {
         Evaluacion evaluacion = evaluacionServ.agregar(datosCrear);
         return ResponseEntity.ok(assembler.toModel(evaluacion));
     }
+
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Eliminar una evaluación",
+        description = "Elimina una evaluación por su ID."
+    )
 
     // ELIMINAR: eliminar una evaluacion según su ID
     @DeleteMapping("/eliminar/{id}")

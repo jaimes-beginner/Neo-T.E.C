@@ -23,9 +23,6 @@ import com.duoc.api_usuarios.model.request.UsuarioCreate;
 import com.duoc.api_usuarios.model.request.UsuarioUpdate;
 import com.duoc.api_usuarios.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.MediaType;
 import jakarta.validation.Valid;
 
@@ -46,11 +43,7 @@ public class UsuarioController {
     // SWAGGER: documentar cada endpoint
     @Operation(
         summary = "Obtener a un usuario",
-        description = "Se obtiene a un solo usuario dependiendo de su ID",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Vista generada exitosamente",
-                content = @Content(schema = @Schema(implementation = Usuario.class)))
-        }
+        description = "Se obtiene a un solo usuario dependiendo de su ID"
     )
 
     // OBTENER UNO: devuelve a un usuario por su ID
@@ -68,11 +61,7 @@ public class UsuarioController {
     // SWAGGER: documentar cada endpoint
     @Operation(
         summary = "Obtener a todos los usuarios",
-        description = "Se obtienen todos los usuarios en general, ya sean usuarios activos o no activos.",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Vista generada exitosamente",
-                content = @Content(schema = @Schema(implementation = Usuario.class)))
-        }
+        description = "Se obtienen todos los usuarios en general, ya sean usuarios activos o no activos."
     )
 
     // OBTENER TODOS: devuelve a todos los usuarios en general, activos o no.
@@ -91,11 +80,7 @@ public class UsuarioController {
     // SWAGGER: documentar cada endpoint
     @Operation(
         summary = "Obtener a todos los usuarios activos",
-        description = "Se obtienen todos los usuarios que estén activos, es decir, usuarios que no se hayan eliminado/descartado.",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Vista generada exitosamente",
-                content = @Content(schema = @Schema(implementation = Usuario.class)))
-        }
+        description = "Se obtienen todos los usuarios que estén activos, es decir, usuarios que no se hayan eliminado/descartado."
     )
 
    // OBTENER ACTIVOS: devuelve a todos los usuarios activos
@@ -114,12 +99,7 @@ public class UsuarioController {
     // SWAGGER: documentar cada endpoint
     @Operation(
         summary = "Registrar nuevo usuario",
-        description = "Registra un nuevo usuario en el sistema, siempre y cuando este con exita previamente.",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Usuario registrado exitosamente",
-                content = @Content(schema = @Schema(implementation = Usuario.class))),
-            @ApiResponse(responseCode = "400", description = "Datos inválidos")
-        }
+        description = "Registra un nuevo usuario en el sistema, siempre y cuando este con exita previamente."
     )
 
     // REGISTRAR: registra-agrega a un nuevo usuario según los datos (datosCrear)
@@ -131,11 +111,7 @@ public class UsuarioController {
     // SWAGGER: documentar cada endpoint
     @Operation(
         summary = "Eliminar a un usuario",
-        description = "Aquí se 'elimina' a un usuario dependiendo de su ID, se cambia su estado de activo (true) a inactivo (false).",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Usuario eliminado exitosamente",
-                content = @Content(schema = @Schema(implementation = Usuario.class)))
-        }
+        description = "Aquí se 'elimina' a un usuario dependiendo de su ID, se cambia su estado de activo (true) a inactivo (false)."
     )
 
     // ELIMINAR: elimina a un usuario según su ID
@@ -148,11 +124,7 @@ public class UsuarioController {
     // SWAGGER: documentar cada endpoint
     @Operation(
         summary = "Modificar a un usuario",
-        description = "Aquí se modifica a un usuario dependiendo de su ID, se puede cambiar cualquiera de sus datos que aparecen en el cuerpo.",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "Usuario modificado exitosamente",
-                content = @Content(schema = @Schema(implementation = Usuario.class)))
-        }
+        description = "Aquí se modifica a un usuario dependiendo de su ID, se puede cambiar cualquiera de sus datos que aparecen en el cuerpo."
     )
 
     // MODIFICAR: modificar a un usuario según su ID, que se encuentra en los datos (datosModificar)

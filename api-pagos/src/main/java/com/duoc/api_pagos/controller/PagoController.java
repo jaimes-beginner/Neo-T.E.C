@@ -21,6 +21,8 @@ import com.duoc.api_pagos.assemblers.PagoModelAssembler;
 import com.duoc.api_pagos.model.entity.Pago;
 import com.duoc.api_pagos.model.request.PagoCreate;
 import com.duoc.api_pagos.service.PagoService;
+
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 /*------------------------------------------*/
@@ -37,6 +39,12 @@ public class PagoController {
     @Autowired
     private PagoModelAssembler assembler;
 
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener un pago",
+        description = "Obtiene un pago por su ID."
+    )
+
     // OBTENER UNO: Obtener un pago por su ID, con modificaciónes para el HATEOAS
     @GetMapping("/{idPago}")
     public ResponseEntity<EntityModel<Pago>> obtenerUno(@PathVariable int idPago) {
@@ -46,6 +54,12 @@ public class PagoController {
         }
         return ResponseEntity.ok(assembler.toModel(pago));
     }
+
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener todos los pagos",
+        description = "Obtiene todos los pagos que se han realizado."
+    )
 
     // OBTENER TODOS: Obtener todos los pagos, con modificaciónes para el HATEOAS
     @GetMapping("/all")
