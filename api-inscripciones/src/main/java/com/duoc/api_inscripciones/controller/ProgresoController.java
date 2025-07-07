@@ -15,6 +15,8 @@ import com.duoc.api_inscripciones.assemblers.ProgresoModelAssembler;
 import com.duoc.api_inscripciones.model.entity.Progreso;
 import com.duoc.api_inscripciones.model.request.ProgresoUpdate;
 import com.duoc.api_inscripciones.service.ProgresoService;
+
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 
@@ -32,6 +34,13 @@ public class ProgresoController {
     @Autowired
     private ProgresoModelAssembler assembler;
 
+
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener un progreso",
+        description = "Obtiene un progreso según su ID, siempre y cuando este exista."
+    )
+
     // OBTENER UNO: devuelve a un usuario por su ID
     @GetMapping("/{idUsuario}")
     public ResponseEntity<EntityModel<Progreso>> obtenerUno(@PathVariable int idUsuario) {
@@ -44,6 +53,12 @@ public class ProgresoController {
         return ResponseEntity.ok(assembler.toModel(progreso));
     }
 
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Obtener según los datos",
+        description = "Obtiene el progreso específico según los datos, el ID del usuario, y el ID del curso al que se le quiere ver el progreso."
+    )
+
     // OBTENER SEGUN DATOS: devuelve el progreso de un usuario y su respectivo curso
     @GetMapping("/progress/user/{idUsuario}/course/{idCurso}")
     public ResponseEntity<EntityModel<Progreso>> obtenerSegunDatos(@PathVariable int idUsuario, int idCurso) {
@@ -55,6 +70,12 @@ public class ProgresoController {
         }
         return ResponseEntity.ok(assembler.toModel(progreso));
     }
+
+    // SWAGGER: documentar cada endpoint
+    @Operation(
+        summary = "Actualizar un progreso",
+        description = "Modifica/actualiza un progreso de un usuario, si este no tiene progreso, entonces creará uno."
+    )
 
     // ACTUALIZAR PROGRESO: modifica-actualiza el progreso de un usuario
     @PutMapping("/updateProgress")
