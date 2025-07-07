@@ -10,10 +10,13 @@ import lombok.Data;
 @Data
 public class CursoDTO {
 
-    private int idCurso;                    // Identificador del curso
+    // ID CURSO: Identificador del curso
+    private int idCurso;                   
 
-    private String tituloCurso;             // Titulo del curso
+    // TITULO CURSO: Titulo del curso
+    private String tituloCurso;           
 
-    private String descripcionCurso;        // Descripción del curso
+    // DESCRIPCION CURSO: Descripción del curso
+    private String descripcionCurso;       
     
 }

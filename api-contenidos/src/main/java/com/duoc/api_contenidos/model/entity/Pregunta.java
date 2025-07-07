@@ -18,24 +18,27 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "questions")          // El nombre de la tabla
+@Table(name = "questions")    
 public class Pregunta {
     
+    // ID PREGUNTA: Identificador de la pregunta
     @Id
-    @GeneratedValue
-    (strategy = GenerationType.IDENTITY)          
-    private int idPregunta;                 // Identificador de la pregunta
+    @GeneratedValue(strategy = GenerationType.IDENTITY)          
+    private int idPregunta;               
 
+    // ENUNCIADO PREGUNTA: Enunciado de la pregunta
     @Column(nullable = false)
-    private String enunciadoPregunta;       // Enunciado de la pregunta
+    private String enunciadoPregunta;    
 
+    // OPCIONES PREGUNTA: Opciones-alternativas de la pregunta
     @Column(nullable = false)
-    private String opcionesPregunta;        // Opciones-alternativas de la pregunta
+    private String opcionesPregunta;       
 
+    // OPCIONES CORRECTA PREGUNTA: opcion-alternativa correcta
     @Column(nullable = false)
-    private String opcionesCorrectaPregunta;    // opcion-alternativa correcta
+    private String opcionesCorrectaPregunta;    
     
-    // Puede haber muchas pregunta en una evaluacion
+    // EVALUACION RELACION: Puede haber muchas pregunta en una evaluacion
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "idEvaluacion", nullable = false)

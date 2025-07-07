@@ -12,11 +12,14 @@ import lombok.Data;
 @Data
 public class EvaluacionCreate {
     
+    // TIPO EVALUACION: Tipo de evaluación
     @NotBlank
-    private String tipoEvaluacion;          // Tipo de evaluación
+    private String tipoEvaluacion;       
 
-    private int idContenido;                // Id del contenido en donde pertenece esta evaluación
+    // ID CONTENIDO: Id del contenido en donde pertenece esta evaluación
+    private int idContenido;              
 
-    private List<PreguntaCreate> listaPreguntas;     // Las preguntas que tiene la evaluacion
+    // LISTA PREGUNTAS: Las preguntas que tiene la evaluacion
+    private List<PreguntaCreate> listaPreguntas;    
 
 }

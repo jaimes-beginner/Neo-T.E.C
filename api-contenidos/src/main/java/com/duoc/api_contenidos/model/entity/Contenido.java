@@ -20,31 +20,33 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "contents")           // Nombre de la tabla
+@Table(name = "contents")      
 public class Contenido {
     
+    // ID CONTENIDO: Identificador del contenido 
     @Id
-    @GeneratedValue
-    (strategy = GenerationType.IDENTITY)
-    private int idContenido;                // Identificador del contenido 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idContenido;             
 
+    // TIPO CONTENIDO: Video, pdf o quiz
     @Column(nullable = false)
-    private String tipoContenido;           // Video, pdf o quiz
+    private String tipoContenido;   
 
+    // URL CONTENIDO: Url en donde está el contenido
     @Column(nullable = false)
-    private String urlContenido;            // Url en donde está el contenido
+    private String urlContenido;         
 
+    // TITULO CONTENIDO: Titulo del contenido
     @Column(nullable = false)
-    private String tituloContenido;         // Titulo del contenido
+    private String tituloContenido;       
     
+    // ID CURSO CONTENIDO: Referencia al curso (está en otro microservicio)
     @Column(nullable = false)
-    private int idCursoContenido;           // Referencia al curso (está en otro microservicio)
+    private int idCursoContenido;          
     
-
-    // Contenido puede tener muchas evaluaciones
+    // LISTA EVALUACIONES: Contenido puede tener muchas evaluaciones
     @JsonManagedReference
     @OneToMany(mappedBy = "contenido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Evaluacion> listaEvaluaciones = new ArrayList<>();
-
 
 }

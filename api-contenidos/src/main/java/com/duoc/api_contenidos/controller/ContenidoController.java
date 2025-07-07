@@ -24,7 +24,6 @@ import com.duoc.api_contenidos.model.entity.Contenido;
 import com.duoc.api_contenidos.model.request.ContenidoCreate;
 import com.duoc.api_contenidos.model.request.ContenidoUpdate;
 import com.duoc.api_contenidos.service.ContenidoService;
-
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 

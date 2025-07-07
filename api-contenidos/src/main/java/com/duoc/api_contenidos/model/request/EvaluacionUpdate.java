@@ -10,10 +10,13 @@ import lombok.Data;
 @Data
 public class EvaluacionUpdate {
     
-    private int idEvaluacion;           // El id de la evaluación para buscarlo
+    // ID EVALUACION: El id de la evaluación para buscarlo
+    private int idEvaluacion;           
 
-    private Integer idCursoEvaluacion;          // El id el curso al que pertenece la evaluación              
+    // ID CURSO EVALUACION: El id el curso al que pertenece la evaluación   
+    private Integer idCursoEvaluacion;                     
 
-    private String tipoEvaluacion;              // Tipo de evaluación
+    // TIPO EVALUACION: Tipo de evaluación
+    private String tipoEvaluacion;              
 
 }

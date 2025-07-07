@@ -11,13 +11,16 @@ import lombok.Data;
 @Data
 public class PreguntaCreate {
     
+    // ENUNCIADO PREGUNTA: Enunciado de la pregunta
     @NotBlank
-    private String enunciadoPregunta;       // Enunciado de la pregunta
+    private String enunciadoPregunta;       
 
+    // OPCIONES PREGUNTA: Opciones-alternativas de la pregunta
     @NotBlank
-    private String opcionesPregunta;        // Opciones-alternativas de la pregunta
+    private String opcionesPregunta;        
 
+    // RESP CORRECTA PREGUNTA: La respuesta correcta
     @NotBlank
-    private String respCorrectaPregunta;    // La respuesta correcta
+    private String respCorrectaPregunta;    
 
 }

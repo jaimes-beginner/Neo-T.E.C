@@ -27,25 +27,25 @@ import lombok.Data;
 @Table(name = "evaluations")
 public class Evaluacion {
     
+    // ID EVALUACION: Identificador de la evaluación
     @Id
-    @GeneratedValue
-    (strategy = GenerationType.IDENTITY)
-    private int idEvaluacion;               // Identificador de la evaluación
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idEvaluacion;               
 
+    // TIPO EVALUACION: Tipo de evaluación (quiz, final)
     @Column(nullable = false)
-    private String tipoEvaluacion;          // Tipo de evaluación (quiz, final)
+    private String tipoEvaluacion;   
 
-    private Date creacionEvaluacion;        // Fecha de creación de la evaluación
+    // CREACION EVALUACION: Fecha de creación de la evaluación
+    private Date creacionEvaluacion;        
 
-
-    // Puede haber muchas evaluaciones en un contenido
+    // CONTENIDO: Puede haber muchas evaluaciones en un contenido
     @ManyToOne
     @JsonBackReference
     @JoinColumn(name = "idContenido", nullable = false)
     private Contenido contenido;    
 
-
-    // Una evaluacion puede tener muchas preguntas
+    // LISTA PREGUNTAS: Una evaluacion puede tener muchas preguntas
     @JsonManagedReference
     @OneToMany(mappedBy = "evaluacionRelacion", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pregunta> listaPreguntas = new ArrayList<>();       

@@ -12,16 +12,20 @@ import lombok.Data;
 @Data
 public class ContenidoCreate {
     
+    // TIPO CONTENIDO: El tipo de contenido  
     @NotBlank
-    private String tipoContenido;           // El tipo de contenido   
+    private String tipoContenido;      
 
+    // URL CONTENIDO: Url del contendio
     @NotBlank
-    private String urlContenido;            // Url del contendio
+    private String urlContenido;       
 
+    // TITULO CONTENIDO: Titulo del contenido
     @NotBlank
-    private String tituloContenido;         // Titulo del contenido
+    private String tituloContenido;     
 
+    // ID CURSO CONTENIDO: Id del curso al que pertenece este contenido
     @NotNull
-    private int idCursoContenido;           // Id del curso al que pertenece este contenido
+    private int idCursoContenido;        
 
 }

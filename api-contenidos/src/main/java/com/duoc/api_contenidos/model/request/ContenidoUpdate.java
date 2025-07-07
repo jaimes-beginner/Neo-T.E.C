@@ -11,15 +11,20 @@ import lombok.Data;
 @Data
 public class ContenidoUpdate {
 
+    // ID CONTENIDO: Id del contenido para buscarlo
     @NotNull
-    private int idContenido;            // Id del contenido para buscarlo
+    private int idContenido;           
 
-    private String tipoContenido;           // El tipo de contenido   
+    // TIPO CONTENIDO: El tipo de contenido   
+    private String tipoContenido;       
 
-    private String urlContenido;            // Url del contendio
+    // URL CONTENIDO:  Url del contendio
+    private String urlContenido;         
 
-    private String tituloContenido;         // Titulo del contenido
+    // TITULO CONTENIDO: Titulo del contenido
+    private String tituloContenido;        
 
-    private Integer idCursoContenido;       // Id del curso al que pertenece este contenido
+    // ID CURSO CONTENIDO: Id del curso al que pertenece este contenido
+    private Integer idCursoContenido;       
 
 }
