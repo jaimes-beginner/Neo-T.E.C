@@ -1,2 +1,2 @@
 # Neo-T.E.C
-Desarrollo de una solución tecnológica que permita a "EduTech Innovators SPA" superar las limitaciones de su sistema monolítico actual y soportar su continuo crecimiento. Este es un proyecto puramente Backend.
+Desarrollar una solución tecnológica que permita a "EduTech Innovators SPA" superar las limitaciones de su sistema monolítico actual y soportar su continuo crecimiento.
